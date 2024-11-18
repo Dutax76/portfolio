@@ -1,3 +1,6 @@
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color: #fadede;
 }
@@ -15,6 +18,7 @@ nav{
 nav > ol > li {
     display: inline-block;
     letter-spacing: 1px;
+    font-size: x-large;
     margin: 0 5px;
     transition: transform 0.3s ease, font-size 0.3s ease;
     background-color: #5abba6;
@@ -23,17 +27,18 @@ nav > ol > li {
 }
 
 nav > ol > li:hover {
-    color: #4a356d;
-    font-size: 1.1em;
-    transform: translateY(5px);
+    font-size: xx-large;
+    transform: translateY(2px);
 }
 section{
-    background-color: #23b6a7;
+    background-color: #4a9988;
     margin: 10px;
+    border-radius: 5px;
 }
 .textPresentation > p{
     text-align: justify;
     line-height: 1.5;
+    font-size: x-large;
 }
 .blocPresentation,.blocFormation{
     display: flex;
@@ -43,24 +48,34 @@ section{
 }
 
 .blocPresentation > div,.blocFormation > div {
-    flex: 2; 
     text-align: center; 
     padding: 20px;
 }
-
 .photoMoi{
     width: 275px;
     height: 350px;
     border-radius: 5px;
-    margin-right: 20px;
+    margin-right: 5px;
 }
-
+a{
+    text-decoration: none;
+    color:black
+}
+a:hover{
+    color: #4a356d;
+}
 #jeuH1{
     text-align: center;
     padding-top: 20px;
 }
 
 
+#sectionText{
+    font-size: x-large;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin-bottom: 0px;
+}
 /*JEU DE MEMOIRE*/
 
 #game-board {
@@ -75,30 +90,30 @@ section{
 .card {
     width: 100px;
     height: 100px;
-    background-color: #570f0fe7;
+    background-color: #36685d;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    color: transparent; /* Le contenu est invisible au départ */
+    color: transparent;
     cursor: pointer;
     transform: rotateY(0);
     transition: transform 0.4s, color 0.4s;
 }
 
 .card.hidden {
-    color: transparent; /* Cache le contenu */
+    color: transparent; 
 }
 
 .card.revealed {
     background-color: #fff;
-    color: black; /* Montre le contenu */
+    color: black; 
     transform: rotateY(180deg);
 }
 
 .card.matched {
     background-color: #ddd;
     color: #bbb;
-    pointer-events: none; /* Désactive les clics */
+    pointer-events: none;
 }
