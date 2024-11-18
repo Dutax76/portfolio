@@ -1,0 +1,56 @@
+body{
+    background-color: #7D60B0;
+}
+*{
+    font-family: 'Outfit';
+}
+nav{
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+    text-align: center;
+    padding: 10px;
+}
+
+nav > ol > li {
+    display: inline-block;
+    letter-spacing: 1px;
+    margin: 0 15px;
+    transition: transform 0.3s ease, font-size 0.3s ease;
+    background-color: #7D60B0;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+nav > ol > li:hover {
+    color: #281941;
+    font-size: 1.1em;
+    transform: translateY(5px);
+}
+section{
+    background-color: #D5C4F2;
+    margin: 10px;
+}
+.textPresentation > p{
+    text-align: justify;
+    line-height: 1.5;
+}
+.blocPresentation,.blocFormation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    gap: 10px;
+}
+
+.blocPresentation > div,.blocFormation > div {
+    flex: 2; 
+    text-align: center; 
+    padding: 20px;
+}
+
+.photoMoi{
+    width: 350px;
+    height: 350px;
+    border-radius: 5px;
+    margin: 20px;
+}
