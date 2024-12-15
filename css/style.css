@@ -129,6 +129,55 @@ a:hover{
     align-items: center;
 }
 
+#projets{
+    padding-bottom: 10px;
+}
+
+#contacter {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: center;
+}
+#sectionText{
+    margin: 0;
+    padding: 0;
+}
+
+.blocContacter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espacement entre les éléments */
+}
+
+.contacterItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+}
+
+.contacterItem p {
+    margin: 0;
+    font-weight: bold;
+    color: #4a356d;
+    font-size: 24px; /* Augmente la taille de la police */
+}
+
+.contacterItem a {
+    text-decoration: none;
+    color: #4a9988;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.contacterItem a:hover {
+    color: #36685d;
+    text-decoration: underline;
+}
 
 
 
@@ -176,3 +225,75 @@ a:hover{
     color: #bbb;
     pointer-events: none;
 }
+
+
+/*SLIDER*/
+
+/* Conteneur du slider */
+.slider-container {
+    position: relative;
+    margin: 20px auto;
+    max-width: 1000px; /* Augmente la largeur du conteneur */
+    overflow: hidden; /* Garde les éléments en dehors de la vue cachés */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Slider contenant les slides */
+.slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    gap: 30px; /* Augmente l'espacement entre les slides */
+}
+
+/* Slide individuel */
+.slider-item {
+    flex: 0 0 auto;
+    width: 400px; /* Largeur augmentée pour les slides */
+    text-align: center;
+    background-color: #ffffff;
+    padding: 15px; /* Augmente le padding interne */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Image dans le slide */
+.project-image {
+    width: 100%; /* L'image prend toute la largeur du slide */
+    height: 250px; /* Augmente la hauteur des images */
+    object-fit: cover; /* Conserve les proportions tout en remplissant l'espace */
+    border-radius: 10px;
+}
+
+/* Boutons de navigation */
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4a9988;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Bouton Précédent */
+.slider-button.prev {
+    left: 10px;
+}
+
+/* Bouton Suivant */
+.slider-button.next {
+    right: 10px;
+}
+
+/* Désactiver un bouton */
+.slider-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+

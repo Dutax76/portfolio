@@ -117,39 +117,77 @@
     </section>
 
     <section id="projets">
-        <p id="sectionText">🧑🏻‍💻 Projets </p>
-        <div class="blocProjets">
-            <div class="projets">
+        <p id="sectionText">🧑🏻‍💻 Projets</p>
+        <div class="slider-container">
+            <button class="slider-button prev" aria-label="Previous Project">←</button>
+            <div class="slider">
+                <div class="slider-item">
+                    <img src="../img/projets/QIkemon.png" alt="QIkémon" class="project-image">
+                    <h3>QIkémon</h3>
+                    <p>Jeu sur Terminal inspiré de Pokémon pour apprendre différentes matières aux plus jeunes.</p>
+                </div>
+                <div class="slider-item">
+                    <img src="../img/projets/Cocovoit.png" alt="CocoVoit" class="project-image">
+                    <h3>CocoVoit</h3>
+                    <p>Site internet de covoiturage.</p>
+                </div>
+                <div class="slider-item">
+                    <img src="../img/projets/Itineraires.png" alt="Application SNCF" class="project-image">
+                    <h3>Itinéraires</h3>
+                    <p>Application JavaFx qui permettrait de trouver le meilleur chemin possible entre 2 villes A et B.</p>
+                </div>
+                <div class="slider-item">
+                    <img src="../img/projets/machine_virtuelle.png" alt="Installation machine virtuelle" class="project-image">
+                    <h3>Machine Virtuelle</h3>
+                    <p>Installation d'une machine virtuelle, mais aussi l'apprentissage des outils de Git.</p>
+                </div>
+                <div class="slider-item">
+                    <img src="../img/projets/parcourssup.png" alt="ParcourSup BDD" class="project-image">
+                    <h3>ParcourSup BDD</h3>
+                    <p>La liste de toutes les formations parcoursup 2023. Ce projet avait pour objectif de nous apprendre à concevoir une base de données en utilisant des données fournies.</p>
+                </div>
+                <div class="slider-item">
+                    <img src="../img/projets/classification.png" alt="Application de Classification" class="project-image">
+                    <h3>Application Classification</h3>
+                    <p>Application JavaFx qui permet de classifier des données (.csv) qui sont mises dans un graphe</p>
+                </div>
+                <div class="slider-item">
+                    <img src="../img/projets/othello.png" alt="Othello" class="project-image">
+                    <h3>Othello</h3>
+                    <p>Jeu sur le terminal se basant sur le jeu  Othello</p>
+                </div>
+                <!-- Ajoute ici les autres projets avec des balises similaires -->
             </div>
-            <div class="textProjets">
-            </div>
+            <button class="slider-button next" aria-label="Next Project">→</button>
         </div>
     </section>
 
-    <section id="experiences">
-        <p id="sectionText">🔨 Expériences </p>
-        <div class="blocExperiences">
-            <div class="experiences">
-            </div>
-            <div class="textExperiences">
-            </div>
-        </div>
-    </section>
-
-    <section id="contacter">
-        <p id="sectionText">🖆 Me Contacter </p>
-        <div class="blocContacter">
-            <div class="contacter">
-            </div>
-            <div class="textContacter">
-            </div>
-        </div>
-    </section>
+    
 
     <section class="jeuCartes">
         <h1 id="jeuH1">À votre mémoire !</h1>
         <div id="game-board"></div>
         <script src="../css/script.js"></script>
+    </section>
+
+    <section id="contacter">
+        <p id="sectionText">🖆 Me Contacter</p>
+        <div class="blocContacter">
+            <div class="contacterItem">
+                <p><strong>📧 Email :</strong></p>
+                <a href="mailto:ton.email@example.com">thomas.guislin@gmail.com</a>
+            </div>
+            <div class="contacterItem">
+                <a href="https://www.linkedin.com/in/thomas-guislin-a23508329/" target="_blank"><p><strong>🔗 LinkedIn </strong></p></a>
+            </div>
+            <div class="contacterItem">
+                <a href="https://gitlab.univ-lille.fr/thomas.guislin.etu" target="_blank"><p><strong>💻 GitLab </strong></p></a>
+            </div>
+            <div class="contacterItem">
+                <p><strong>🎵 Spotify :</strong></p>
+                <a href="https://open.spotify.com/playlist/50iHO2hYAGFbFb3wZN7Paz?si=a9ad8c4adb174eb3" target="_blank">Ma playlist Spotify</a>
+            </div>
+        </div>
     </section>
     
 </body>
