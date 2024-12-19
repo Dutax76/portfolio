@@ -82,6 +82,12 @@ slider.addEventListener('mousedown', (e) => {
     startX = e.pageX - slider.offsetLeft;
     scrollLeft = slider.scrollLeft;
 });
+const stopDragging = () => {
+    isDragging = false;
+    slider.classList.remove('dragging');
+}
+
+document.addEventListener('mouseup', stopDragging);
 
 slider.addEventListener('mouseup', () => {
     isDragging = false;
