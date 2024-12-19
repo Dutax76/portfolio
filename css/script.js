@@ -71,6 +71,34 @@ const sliderItems = document.querySelectorAll('.slider-item');
 
 let currentIndex = 0;
 
+let isDragging = false;
+let startX
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+    if(e.target.classList.contains('project-image')) return;
+    isDragging = true;
+    slider.classList.add('dragging');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('mouseup', () => {
+    isDragging = false;
+    slider.classList.remove('dragging');
+});
+
+slider.addEventListener('mousemove', (e) => {
+    if(!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x-startX) * 2;
+    slider.scrollLeft = scrollLeft-walk;
+})
+images.forEach(image => {
+    image.addEventListener('mousedown', (e) => e.preventDefault());
+})
+
 function updateSlider() {
     const itemWidth = sliderItems[0].offsetWidth + 20; // Inclure l'espace entre les items
     slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;

@@ -252,6 +252,12 @@ a:hover{
     display: flex;
     transition: transform 0.3s ease-in-out;
     gap: 30px; /* Augmente l'espacement entre les slides */
+    cursor: grab;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+.slider.dragging{
+    cursor: grabbing;
 }
 
 /* Slide individuel */
@@ -263,6 +269,11 @@ a:hover{
     padding: 15px; /* Augmente le padding interne */
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
 }
 
 /* Image dans le slide */
@@ -271,6 +282,11 @@ a:hover{
     height: 250px; /* Augmente la hauteur des images */
     object-fit: cover; /* Conserve les proportions tout en remplissant l'espace */
     border-radius: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
 }
 
 /* Boutons de navigation */
