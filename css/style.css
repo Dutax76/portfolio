@@ -205,6 +205,11 @@ a:hover{
     cursor: pointer;
     transform: rotateY(0);
     transition: transform 0.4s, color 0.4s;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
 }
 
 .card.hidden {
