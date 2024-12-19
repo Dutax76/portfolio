@@ -196,6 +196,7 @@ a:hover{
 }
 
 .card {
+    font-family: "Apple Color Emoji", "Segeo UI Emoji", "Noto Color Emoji", system-ui, -apple-system;
     width: 100px;
     height: 100px;
     background-color: #36685d;
