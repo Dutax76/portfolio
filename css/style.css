@@ -7,6 +7,9 @@ body{
 *{
     font-family: 'Outfit';
 }
+section{
+    scroll-margin-top: 70px;
+}
 nav{
     position: sticky;
     top: 0; 
