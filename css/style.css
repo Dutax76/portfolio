@@ -216,6 +216,11 @@ a:hover{
     cursor: pointer;
 }
 
+.card div {
+    line-height: 1; /* Assure un bon alignement vertical */
+    font-size: 2rem; /* Taille des emojis */
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; /* Polices compatibles */
+}
 .card.hidden {
     color: transparent; 
 }

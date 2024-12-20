@@ -13,8 +13,12 @@ symbols.forEach((symbol) => {
     const card = document.createElement('div');
     card.classList.add('card', 'hidden'); // Commence avec la classe "hidden"
     card.dataset.symbol = symbol; // Stocke le symbole pour comparaison
-    card.textContent = symbol; // Ajoute le symbole (sera masqué via CSS)
 
+    const emojiDiv = document.createElement('div');
+    emojiDiv.style.fontSize = '2rem';
+    emojiDiv.style.fontFamily = "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif";
+    emojiDiv.textContent = symbol; // Ajoute l'emoji dans la div
+    card.appendChild(emojiDiv);
 
     gameBoard.appendChild(card);
 });
