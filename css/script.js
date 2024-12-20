@@ -14,6 +14,8 @@ symbols.forEach((symbol) => {
     card.classList.add('card', 'hidden'); // Commence avec la classe "hidden"
     card.dataset.symbol = symbol; // Stocke le symbole pour comparaison
     card.textContent = symbol; // Ajoute le symbole (sera masqué via CSS)
+
+
     gameBoard.appendChild(card);
 });
 
