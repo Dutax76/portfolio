@@ -6,6 +6,7 @@ body{
 }
 *{
     font-family: 'Outfit';
+    all: unset;
 }
 section{
     scroll-margin-top: 70px;
@@ -196,7 +197,7 @@ a:hover{
 }
 
 .card {
-    font-family: "Apple Color Emoji", "Segeo UI Emoji", "Noto Color Emoji", system-ui, -apple-system;
+    font-family: -apple-system,"Apple Color Emoji", "Segeo UI Emoji", "Noto Color Emoji", system-ui;
     width: 100px;
     height: 100px;
     background-color: #36685d;
