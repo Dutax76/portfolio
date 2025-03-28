@@ -115,28 +115,7 @@ images.forEach(image => {
 function updateSlider() {
     const itemWidth = sliderItems[0].offsetWidth + 20; // Inclure l'espace entre les items
     slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-
-    // Gestion de l'état des boutons
-    // prevButton.disabled = currentIndex === 0; // Désactiver "Précédent" si au début
-    // nextButton.disabled = currentIndex === sliderItems.length - 2; // Désactiver "Suivant" si à la fin
 }
-
-// Action pour le bouton "Précédent"
-// prevButton.addEventListener('click', () => {
-//     if (currentIndex > 0) {
-//         currentIndex--; // Décrémente l'index
-//         updateSlider(); // Met à jour l'affichage
-//     }
-// });
-
-// // Action pour le bouton "Suivant"
-// nextButton.addEventListener('click', () => {
-//     if (currentIndex < sliderItems.length - 1) {
-//         currentIndex++; // Incrémente l'index
-//         updateSlider(); // Met à jour l'affichage
-//     }
-// });
-
 // Mise à jour initiale au chargement de la page
 updateSlider();
 
