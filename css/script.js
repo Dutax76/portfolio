@@ -69,55 +69,73 @@ function resetSelection() {
     lockBoard = false;
 }
 
-
 const slider = document.querySelector('.slider');
-const prevButton = document.querySelector('.slider-button.prev');
-const nextButton = document.querySelector('.slider-button.next');
 const sliderItems = document.querySelectorAll('.slider-item');
-
-let currentIndex = 0;
+const images = document.querySelectorAll('.slider-item > img');
 
 let isDragging = false;
-let startX
-let scrollLeft;
+let startX = 0;
+let scrollLeft = 0;
 
-slider.addEventListener('mousedown', (e) => {
-    if(e.target.classList.contains('project-image')) return;
+slider.addEventListener('pointerdown', (e) => {
     isDragging = true;
-    slider.classList.add('dragging');
-    startX = e.pageX - slider.offsetLeft;
+    startX = e.clientX;
     scrollLeft = slider.scrollLeft;
+    slider.style.cursor = 'grabbing';
+
+    // Empêcher le comportement par défaut pour éviter les sélections de texte
+    e.preventDefault();
 });
+
 const stopDragging = () => {
     isDragging = false;
-    slider.classList.remove('dragging');
-}
+    slider.style.cursor = 'grab';
+};
 
-document.addEventListener('mouseup', stopDragging);
+slider.addEventListener('pointerup', stopDragging);
+slider.addEventListener('pointerleave', stopDragging);
 
-slider.addEventListener('mouseup', () => {
-    isDragging = false;
-    slider.classList.remove('dragging');
+slider.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    
+    // Calculer le déplacement instantanément
+    const deltaX = e.clientX - startX;
+    slider.scrollLeft = scrollLeft - deltaX;
 });
 
-slider.addEventListener('mousemove', (e) => {
-    if(!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x-startX) * 2;
-    slider.scrollLeft = scrollLeft-walk;
-})
-const images = document.querySelectorAll('.slider-item > img');
+// Empêcher le drag des images pour éviter les glitches
 images.forEach(image => {
-    image.addEventListener('mousedown' , (event) => event.preventDefault());
-})
+    image.addEventListener('pointerdown', (event) => event.preventDefault());
+});
 
+// Fonction de mise à jour du slider (corrigée)
 function updateSlider() {
+    if (sliderItems.length === 0) return; // Éviter les erreurs si aucun item n'est présent
     const itemWidth = sliderItems[0].offsetWidth + 20; // Inclure l'espace entre les items
-    slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+    slider.scrollLeft = itemWidth * currentIndex;
 }
-// Mise à jour initiale au chargement de la page
-updateSlider();
 
 // Ajuste le slider si la fenêtre est redimensionnée
 window.addEventListener('resize', updateSlider);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section'); // Sélectionner toutes les sections
+
+    const revealSection = () => {
+        sections.forEach((section) => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const windowHeight = window.innerHeight;
+
+            // Si la section est visible dans la fenêtre
+            if (sectionTop < windowHeight - 150) {
+                section.classList.add('visible'); // Ajouter la classe 'visible'
+                section.classList.remove('sectionHidden'); // Supprimer la classe 'hidden'
+            }
+        });
+    };
+
+    // Lancer la détection du scroll
+    window.addEventListener('scroll', revealSection);
+    revealSection(); // Appel initial pour vérifier l'état des sections au chargement de la page
+});

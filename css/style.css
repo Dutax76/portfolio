@@ -87,6 +87,15 @@ a:hover{
     justify-content: center;
     align-items: center;
 }
+
+.formationColonne > a > div:hover{
+    transform: scale(1.1);
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+.formationColonne > a > div{
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
 .ButInformatique > *, .lyceeRey > *{
     display: inline-block;
     justify-content: space-between;
@@ -113,6 +122,12 @@ a:hover{
     margin: 10px 0 10px 0;
     padding: 0 10px 0 0;
 }
+
+.competencesGauche > *:hover , .competencesDroite > *:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
 .javaLogo, .HTMLLogo, .cssLogo, .cLogo, .pythonLogo,.vscodeLogo, .figmaLogo, .gitlabLogo, .postgresqlLogo, .sqlLogo{
     display: inline-flex;
     justify-content: space-evenly;
@@ -124,6 +139,7 @@ a:hover{
     margin: 0 0 10px 0 ;
     width: 200px;
     box-shadow: 0px 6px 5px #4a356d;
+    transition: transform 0.3s ease, font-size 0.3s ease;
 }
 
 .blocCompetences{
@@ -295,3 +311,37 @@ a:hover{
     cursor: pointer;
 }
 
+.logo{
+    width: 10%;
+    height: 10%;
+    margin: 0;
+    padding: 0;
+    border-radius: 10%;
+}
+.logoDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Animation pour faire apparaître la section */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section.sectionHidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+section.visible {
+    animation: fadeIn 1s forwards;
+}

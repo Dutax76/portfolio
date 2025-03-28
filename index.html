@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Portfolio - Thomas Guislin</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
 
 </head>
 <body>
+    <div class="logoDiv">
+        <img class="logo" src="./img/logo.png" alt="Logo">
+    </div>
     <nav>
         <ol>
             <li><a href="#presentation"> 📍 À propos de moi </a></li>
@@ -19,7 +23,7 @@
 
     </nav>
 
-    <section id="presentation">
+    <section id="presentation" class="sectionHidden">
         <p id="sectionText">📍 À propos de moi :</p>
         <div class="blocPresentation">
             <div class="presentation">
@@ -30,12 +34,12 @@
                     <br>Je m'appelle Thomas Guislin. J'ai 19 ans et suis originaire de Rouen. Actuellement à Lille pour mes études supérieures, je suis en deuxième année de mon BUT-Informatique, situé à l'Université Technologique de Lille (site de Villeneuve d'Ascq).
                         Depuis tout petit, je suis passioné d'informatique: j'ai toujours voulu évoluer dans ce domaine !</p>
                 <p>Je suis actuellement en pleine <strong>recherche pour une Alternance</strong> à partir de Septembre 2025.</p>
-                <p>Sur un rythme <strong>d'1 semaine en entreprise</strong> et <strong>1 semaine à l'Université</strong>.</p>
+                <p>Sur un rythme d'<strong>1 semaine en entreprise</strong> et <strong>1 semaine à l'Université</strong>.</p>
             </div>
         </div>
     </section>
 
-    <section id="formation">
+    <section id="formation" class="sectionHidden">
         <p id="sectionText">📚 Formations :</p>
         <div class="blocFormation">
             <div class="formationColonne">
@@ -55,7 +59,7 @@
         </div>
     </section>
 
-    <section id="competences">
+    <section id="competences" class="sectionHidden">
         <p id="sectionText">💪 Compétences :</p>
         <div class="blocCompetences">
             
@@ -117,7 +121,7 @@
         </div>
     </section>
 
-    <section id="projets">
+    <section id="projets" class="sectionHidden">
         <p id="sectionText">🧑🏻‍💻 Projets :</p>
         <div class="slider-container">
             <!-- <button class="slider-button prev" aria-label="Previous Project">←</button> -->
@@ -175,13 +179,13 @@
 
     
 
-    <section class="jeuCartes">
+    <section class="jeuCartes" class="sectionHidden">
         <h1 id="jeuH1">À votre mémoire !</h1>
         <div id="game-board"></div>
         <script src="../css/script.js"></script>
     </section>
 
-    <section id="contacter">
+    <section id="contacter" class="sectionHidden">
         <p id="sectionText">✍️ Me Contacter</p>
         <div class="blocContacter">
             <div class="contacterItem">
