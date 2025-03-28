@@ -128,7 +128,7 @@ a:hover{
     transition: transform 0.3s ease, font-size 0.3s ease;
 }
 
-.javaLogo, .HTMLLogo, .cssLogo, .cLogo, .jsLogo,.vscodeLogo, .figmaLogo, .gitlabLogo, .postgresqlLogo, .sqlLogo, .angularLogo, .typescriptLogo, .restLogo, .npmLogo, .karmaLogo, .jasmineLogo{
+.javaLogo, .HTMLLogo, .cssLogo, .cLogo, .jsLogo,.vscodeLogo, .figmaLogo, .gitlabLogo, .postgresqlLogo, .sqlLogo, .angularLogo, .typescriptLogo, .restLogo, .npmLogo, .karmaLogo, .jasmineLogo, .dockerLogo, .podmanLogo{
     display: inline-flex;
     justify-content: space-evenly;
     align-items: center;
