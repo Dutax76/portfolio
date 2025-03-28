@@ -24,7 +24,7 @@ nav > ol > li {
     font-size: x-large;
     margin: 0 5px;
     transition: transform 0.5s ease, font-size 0.5s ease;
-    background-color: #5abba6;
+    background-color: #cecccf;
     border-radius: 3px;
     padding: 5px;
 }
@@ -34,7 +34,7 @@ nav > ol > li:hover {
     transform: translateY(2px);
 }
 section{
-    background-color: #4a9988;
+    background-color: #b6b3b3;
     margin: 10px;
     border-radius: 5px;
 }
@@ -66,7 +66,7 @@ a{
     transition: transform 0.4s, color 0.4s;
 }
 a:hover{
-    transition: transform 0.4s, color 0.4s;
+    transition: transform 0.4s ease, color 0.4s;
     color: #4a356d;
 }
 #jeuH1{
@@ -76,7 +76,7 @@ a:hover{
 
 
 #sectionText{
-    font-size: x-large;
+    font-size: xx-large;
     padding-top: 10px;
     padding-left: 10px;
     margin-bottom: 0px;
@@ -199,7 +199,7 @@ a:hover{
     font-family: -apple-system,"Apple Color Emoji", "Segeo UI Emoji", "Noto Color Emoji", system-ui;
     width: 100px;
     height: 100px;
-    background-color: #36685d;
+    background-color: #8f8b8d;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -300,7 +300,7 @@ a:hover{
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #4a9988;
+    background-color: #E8D7FF;
     color: white;
     border: none;
     cursor: pointer;

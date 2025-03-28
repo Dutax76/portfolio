@@ -107,8 +107,9 @@ slider.addEventListener('mousemove', (e) => {
     const walk = (x-startX) * 2;
     slider.scrollLeft = scrollLeft-walk;
 })
+const images = document.querySelectorAll('.slider-item > img');
 images.forEach(image => {
-    image.addEventListener('mousedown', (e) => e.preventDefault());
+    image.addEventListener('mousedown' , (event) => event.preventDefault());
 })
 
 function updateSlider() {
@@ -116,25 +117,25 @@ function updateSlider() {
     slider.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
 
     // Gestion de l'état des boutons
-    prevButton.disabled = currentIndex === 0; // Désactiver "Précédent" si au début
-    nextButton.disabled = currentIndex === sliderItems.length - 2; // Désactiver "Suivant" si à la fin
+    // prevButton.disabled = currentIndex === 0; // Désactiver "Précédent" si au début
+    // nextButton.disabled = currentIndex === sliderItems.length - 2; // Désactiver "Suivant" si à la fin
 }
 
 // Action pour le bouton "Précédent"
-prevButton.addEventListener('click', () => {
-    if (currentIndex > 0) {
-        currentIndex--; // Décrémente l'index
-        updateSlider(); // Met à jour l'affichage
-    }
-});
+// prevButton.addEventListener('click', () => {
+//     if (currentIndex > 0) {
+//         currentIndex--; // Décrémente l'index
+//         updateSlider(); // Met à jour l'affichage
+//     }
+// });
 
-// Action pour le bouton "Suivant"
-nextButton.addEventListener('click', () => {
-    if (currentIndex < sliderItems.length - 1) {
-        currentIndex++; // Incrémente l'index
-        updateSlider(); // Met à jour l'affichage
-    }
-});
+// // Action pour le bouton "Suivant"
+// nextButton.addEventListener('click', () => {
+//     if (currentIndex < sliderItems.length - 1) {
+//         currentIndex++; // Incrémente l'index
+//         updateSlider(); // Met à jour l'affichage
+//     }
+// });
 
 // Mise à jour initiale au chargement de la page
 updateSlider();
