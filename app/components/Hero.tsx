@@ -7,9 +7,7 @@ const Hero = () => {
   const [isTyping, setIsTyping] = useState(true)
   const [currentPhrase, setCurrentPhrase] = useState(0)
   const [showAnimations, setShowAnimations] = useState(false)
-  const animationRef = useRef<number>()
-  const lastFrameTime = useRef(0)
-  const textProgress = useRef(0)
+  const timeoutRef = useRef<NodeJS.Timeout>()
   
   const phrases = [
     'Développeur Passionné',
@@ -39,54 +37,45 @@ const Hero = () => {
     }
   }, [])
 
-  // Animation optimisée avec requestAnimationFrame
-  const animate = useCallback((currentTime: number) => {
-    if (currentTime - lastFrameTime.current < 120) { // Limite à ~8fps pour économiser CPU
-      animationRef.current = requestAnimationFrame(animate)
-      return
-    }
+  // Retarder les animations non-critiques pour optimiser LCP
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowAnimations(true)
+    }, 100) // Très court délai pour permettre le rendu du contenu critique
     
-    lastFrameTime.current = currentTime
-    const currentPhraseText = phrases[currentPhrase]
+    return () => clearTimeout(timer)
+  }, [])
+
+  // Animation typing simplifiée - se lance quand showAnimations devient true
+  useEffect(() => {
+    if (!showAnimations) return
+
+    let timeout: NodeJS.Timeout | undefined
     
     if (isTyping) {
-      if (textProgress.current < currentPhraseText.length) {
-        textProgress.current += 1
-        setText(currentPhraseText.slice(0, Math.floor(textProgress.current)))
-        animationRef.current = requestAnimationFrame(animate)
+      if (text.length < phrases[currentPhrase].length) {
+        timeout = setTimeout(() => {
+          setText(phrases[currentPhrase].slice(0, text.length + 1))
+        }, 100)
       } else {
-        // Pause avant suppression
-        setTimeout(() => setIsTyping(false), 2000)
+        timeout = setTimeout(() => setIsTyping(false), 2000)
       }
     } else {
-      if (textProgress.current > 0) {
-        textProgress.current -= 0.8 // Suppression plus rapide
-        setText(currentPhraseText.slice(0, Math.floor(textProgress.current)))
-        animationRef.current = requestAnimationFrame(animate)
+      if (text.length > 0) {
+        timeout = setTimeout(() => {
+          setText(text.slice(0, -1))
+        }, 50)
       } else {
         setCurrentPhrase((prev) => (prev + 1) % phrases.length)
         setIsTyping(true)
-        animationRef.current = requestAnimationFrame(animate)
       }
     }
-  }, [isTyping, currentPhrase, phrases])
 
-  // Retarder les animations non-critiques pour optimiser LCP
-  useEffect(() => {
-    // Affichage immédiat du contenu critique
-    const timer = setTimeout(() => {
-      setShowAnimations(true)
-      textProgress.current = 0
-      animationRef.current = requestAnimationFrame(animate)
-    }, 100) // Très court délai pour permettre le rendu du contenu critique
-    
+    timeoutRef.current = timeout
     return () => {
-      clearTimeout(timer)
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+      if (timeout) clearTimeout(timeout)
     }
-  }, [animate])
+  }, [text, isTyping, currentPhrase, showAnimations, phrases])
 
   return (
     <section className="min-h-screen flex items-center justify-center relative pt-20">
