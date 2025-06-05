@@ -4,6 +4,14 @@ import './globals.css'
 export const metadata = {
   title: 'Thomas Guislin - Portfolio',
   description: 'Portfolio de Thomas Guislin, développeur passionné',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/img/logo.png', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/img/logo.png',
+  },
 }
 
 export default function RootLayout({

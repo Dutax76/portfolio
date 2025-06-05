@@ -42,8 +42,12 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg flex items-center justify-center font-bold text-lg">
-              TG
+            <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center bg-gradient-to-r from-neon-blue to-neon-purple p-1">
+              <img 
+                src="/img/logo.png" 
+                alt="Logo Thomas Guislin" 
+                className="w-full h-full object-contain rounded-md"
+              />
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-neon-blue to-neon-purple bg-clip-text text-transparent">
               Thomas Guislin
