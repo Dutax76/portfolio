@@ -1,10 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import LoadingScreen from './components/LoadingScreen'
-import FloatingObjects3D from './components/FloatingObjects3D'
-import AIAssistant from './components/AIAssistant'
-import ClickExplosion from './components/ClickExplosion'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -13,68 +9,31 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 
 export default function Home() {
-  const [showContent, setShowContent] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
   const [glitchEffect, setGlitchEffect] = useState(false)
-  const cursorRef = useRef<HTMLDivElement>(null)
 
-  // Use ref for cursor to avoid re-renders
-  useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.left = `${e.clientX - 192}px`
-        cursorRef.current.style.top = `${e.clientY - 192}px`
-      }
-    }
-
-    window.addEventListener('mousemove', updateMousePosition)
-    return () => window.removeEventListener('mousemove', updateMousePosition)
-  }, [])
-
-  // Effet de glitch aléatoire
+  // Effet de glitch aléatoire optimisé
   useEffect(() => {
     const glitchInterval = setInterval(() => {
-      if (Math.random() < 0.1) { // 10% de chance
+      if (Math.random() < 0.05) {
         setGlitchEffect(true)
-        setTimeout(() => setGlitchEffect(false), 200)
+        setTimeout(() => setGlitchEffect(false), 100)
       }
-    }, 3000)
+    }, 5000)
 
     return () => clearInterval(glitchInterval)
   }, [])
 
-  const handleLoadingComplete = () => {
-    setShowContent(true)
-    // Délai pour permettre l'animation de transition
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 500)
-  }
-
   return (
     <main className={`min-h-screen relative overflow-hidden ${glitchEffect ? 'animate-pulse' : ''}`}>
-      {/* Loading Screen avec transition */}
-      {isLoading && (
-        <div className={`transition-opacity duration-500 ${showContent ? 'opacity-0' : 'opacity-100'}`}>
-          <LoadingScreen onComplete={handleLoadingComplete} />
-        </div>
-      )}
-
-      {/* Contenu principal avec transition */}
-      <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
-      {/* Cursor glow effect - OPTIMIZED */}
-      <div
-        ref={cursorRef}
-        className="fixed w-96 h-96 pointer-events-none z-30 rounded-full opacity-30 transition-opacity duration-300"
-        style={{
-          background: 'radial-gradient(circle, rgba(0,212,255,0.4) 0%, rgba(168,85,247,0.2) 50%, transparent 70%)',
-          filter: 'blur(20px)',
-          willChange: 'transform' // Optimize for transforms
-        }}
-      />
-
-      {/* Enhanced animated background grid */}
+      {/* Background stylé mais optimisé */}
       <div className="fixed inset-0 pointer-events-none">
+        {/* Gradient de base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950" />
+        
+        {/* Overlay avec texture */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-900/20" />
+        
+        {/* Grille cyber */}
         <div 
           className="absolute inset-0 opacity-15"
           style={{
@@ -84,21 +43,36 @@ export default function Home() {
               linear-gradient(rgba(168,85,247,0.1) 1px, transparent 1px),
               linear-gradient(90deg, rgba(168,85,247,0.1) 1px, transparent 1px)
             `,
-            backgroundSize: '50px 50px, 50px 50px, 100px 100px, 100px 100px',
-            animation: 'drift 20s linear infinite, pulse 4s ease-in-out infinite',
-            willChange: 'transform'
+            backgroundSize: '50px 50px, 50px 50px, 100px 100px, 100px 100px'
           }}
         />
+        
+        {/* Points lumineux statiques */}
+        <div className="absolute inset-0">
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-neon-blue rounded-full opacity-30"
+              style={{
+                left: `${15 + (i * 7) % 70}%`,
+                top: `${10 + (i * 11) % 80}%`,
+                boxShadow: '0 0 10px rgba(0, 212, 255, 0.5)'
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Lignes de circuit subtiles */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent" />
+          <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent" />
+          <div className="absolute left-1/4 top-0 w-px h-full bg-gradient-to-b from-transparent via-neon-green to-transparent" />
+          <div className="absolute right-1/4 top-0 w-px h-full bg-gradient-to-b from-transparent via-neon-pink to-transparent" />
+        </div>
       </div>
 
-      {/* Floating 3D Objects - Now isolated from re-renders */}
-      <FloatingObjects3D />
-
-      {/* Click Explosion Effect */}
-      <ClickExplosion />
-
-      {/* Main content with entrance animation */}
-      <div className="animate-fadeInUp">
+      {/* Main content */}
+      <div className="relative z-10">
         <Header />
         <Hero />
         <About />
@@ -107,35 +81,36 @@ export default function Home() {
         <Contact />
       </div>
 
-        {/* AI Assistant */}
-        <AIAssistant />
-      </div>
-
-      {/* Enhanced styles */}
+      {/* Styles optimisés */}
       <style jsx>{`
-        @keyframes drift {
-          from { transform: translate(0, 0); }
-          to { transform: translate(50px, 50px); }
+        /* Animation glitch simplifiée */
+        .animate-pulse {
+          animation: pulse 1s ease-in-out 1;
         }
         
         @keyframes pulse {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 0.25; }
-        }
-        
-        @keyframes fadeInUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(30px); 
-          }
-          to { 
+          0%, 100% { 
             opacity: 1; 
-            transform: translateY(0); 
+          }
+          50% { 
+            opacity: 0.95; 
           }
         }
         
-        .animate-fadeInUp {
-          animation: fadeInUp 1s ease-out;
+        /* Subtle glow pour les points */
+        .w-1.h-1.bg-neon-blue {
+          animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+          from {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0.6;
+            transform: scale(1.2);
+          }
         }
       `}</style>
     </main>

@@ -102,15 +102,15 @@ const Hero = () => {
           {fixedShapes.current.map((shape, i) => (
             <div
               key={i}
-              className="absolute animate-float opacity-20"
+              className="absolute will-change-transform contain-layout opacity-20"
               style={{
                 left: `${shape.left}%`,
                 top: `${shape.top}%`,
-                animationDelay: `${shape.delay}s`,
-                animationDuration: `${shape.duration}s`
+                animation: `float ${shape.duration}s ease-in-out infinite`,
+                animationDelay: `${shape.delay}s`
               }}
             >
-              <div className={`${getSizeClass(shape.size)} border-2 border-neon-blue transform rotate-45 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 shadow-lg shadow-neon-blue/20`} />
+              <div className={`${getSizeClass(shape.size)} border-2 border-neon-blue transform rotate-45 bg-gradient-to-r from-neon-blue/10 to-neon-purple/10 shadow-lg shadow-neon-blue/20 will-change-transform`} />
             </div>
           ))}
         </div>
@@ -118,73 +118,138 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Avatar/Logo */}
-          <div className="mb-8 inline-block">
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1">
-              <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center">
+          {/* Avatar/Logo - TAILLE FIXE */}
+          <div className="mb-8 inline-block w-32 h-32">
+            <div className="w-full h-full mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1">
+              <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center overflow-hidden">
                 <img 
                   src="/img/selfie.jpg" 
                   alt="Thomas Guislin" 
-                  className="w-28 h-28 rounded-full object-cover"
+                  className="w-28 h-28 rounded-full object-cover photo-rotation-fix"
+                  loading="eager"
+                  width="112"
+                  height="112"
                 />
               </div>
             </div>
           </div>
 
-          {/* Main title */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-neon-blue to-neon-purple bg-clip-text text-transparent">
-            Thomas Guislin
-          </h1>
-
-          {/* Animated subtitle */}
-          <div className="text-2xl md:text-3xl font-light mb-8 h-12 flex items-center justify-center">
-            <span className="text-neon-blue font-mono">
-              {text}
-              <span className="animate-pulse">|</span>
-            </span>
+          {/* Main title - HAUTEUR FIXE */}
+          <div className="mb-6 h-20 flex items-center justify-center">
+            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-neon-blue to-neon-purple bg-clip-text text-transparent text-center">
+              Thomas Guislin
+            </h1>
           </div>
 
-          {/* Description */}
-          <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Étudiant passionné en deuxième année de BUT Informatique à Lille, 
-            spécialisé dans la création d'applications web modernes et innovantes.
-            <br />
-            <span className="text-neon-blue font-semibold">
-              Actuellement en recherche d'alternance pour septembre 2025 !
-            </span>
-          </p>
+          {/* Animated subtitle - HAUTEUR ET LARGEUR FIXES POUR ÉVITER CLS */}
+          <div className="text-2xl md:text-3xl font-light mb-8 h-12 flex items-center justify-center">
+            <div className="min-w-96 text-center">
+              <span className="text-neon-blue font-mono">
+                <span className="inline-block min-w-[320px] text-left">
+                  {text}
+                  <span className="animate-pulse will-change-opacity">|</span>
+                </span>
+              </span>
+            </div>
+          </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          {/* Description - HAUTEUR FIXE */}
+          <div className="mb-12 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+              Étudiant passionné en deuxième année de BUT Informatique à Lille, 
+              spécialisé dans la création d'applications web modernes et innovantes.
+              <br />
+              <span className="text-neon-blue font-semibold">
+                Actuellement en recherche d'alternance pour septembre 2025 !
+              </span>
+            </p>
+          </div>
+
+          {/* CTA Buttons - HAUTEUR FIXE */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center h-20">
             <a
               href="#projects"
-              className="group px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-neon-blue/30 transition-all duration-300 hover:scale-105 flex items-center space-x-2"
+              className="group px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-neon-blue/30 transition-all duration-300 hover:scale-105 flex items-center space-x-2 will-change-transform"
             >
               <span>🚀 Voir mes projets</span>
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform will-change-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
             
             <a
               href="#contact"
-              className="group px-8 py-4 border-2 border-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-dark-50 transition-all duration-300 hover:scale-105 flex items-center space-x-2"
+              className="group px-8 py-4 border-2 border-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-dark-50 transition-all duration-300 hover:scale-105 flex items-center space-x-2 will-change-transform"
             >
               <span>💬 Me contacter</span>
-              <svg className="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 group-hover:rotate-12 transition-transform will-change-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </a>
           </div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-neon-blue rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-neon-blue rounded-full mt-2 animate-pulse" />
+          {/* Scroll indicator - POSITION FIXE */}
+          <div className="absolute bottom-8 left-1/2 w-6 h-10 will-change-transform" style={{transform: 'translateX(-50%)'}}>
+            <div className="w-full h-full border-2 border-neon-blue rounded-full flex justify-center will-change-transform" style={{animation: 'bounce 1s infinite'}}>
+              <div className="w-1 h-3 bg-neon-blue rounded-full mt-2 will-change-opacity" style={{animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'}} />
             </div>
           </div>
         </div>
       </div>
+
+      {/* Styles CSS optimisés */}
+      <style jsx>{`
+        /* Correction de rotation pour la photo */
+        .photo-rotation-fix {
+          transform: rotate(90deg);
+        }
+
+        /* Optimisation pour éviter les décalages CLS */
+        .contain-layout {
+          contain: layout style paint;
+        }
+
+        .will-change-transform {
+          will-change: transform;
+        }
+
+        .will-change-opacity {
+          will-change: opacity;
+        }
+
+        /* Animation float optimisée */
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0px);
+          }
+          50% { 
+            transform: translateY(-20px);
+          }
+        }
+
+        /* Optimisation des animations de base */
+        @keyframes bounce {
+          0%, 100% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+          }
+          50% {
+            transform: none;
+            animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+          }
+        }
+
+        /* Media queries pour la responsivité sans décalage */
+        @media (max-width: 768px) {
+          .min-w-96 {
+            min-width: 280px;
+          }
+          
+          .min-w-\\[320px\\] {
+            min-width: 250px !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

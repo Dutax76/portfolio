@@ -27,6 +27,74 @@ body {
   min-height: 100vh;
 }
 
+/* CSS critique pour éviter le flash sans style */
+.loading-container {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optimisations pour réduire les décalages CLS */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Containment pour les animations */
+.animate-pulse,
+.animate-ping,
+.animate-bounce {
+  contain: layout style paint;
+  will-change: transform, opacity;
+}
+
+/* Optimisation des éléments animés */
+[class*="animate-"] {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Forcer l'accélération matérielle pour les transformations */
+.transform,
+[style*="transform"] {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Animation des particules */
+@keyframes particle {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.animate-particle {
+  animation: particle 20s linear infinite;
+}
+
 .glass-effect {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
@@ -68,6 +136,8 @@ body {
   );
   background-size: 400% 400%;
   animation: hologram 4s ease-in-out infinite;
+  will-change: background-position;
+  contain: layout style paint;
 }
 
 @keyframes hologram {
@@ -78,6 +148,8 @@ body {
 .floating-card {
   transform: translateY(0);
   transition: all 0.3s ease;
+  will-change: transform;
+  contain: layout style paint;
 }
 
 .floating-card:hover {
@@ -105,7 +177,7 @@ body {
   background: linear-gradient(180deg, #a855f7, #00d4ff);
 }
 
-/* Animations pour éviter les écrans noirs */
+/* Animations optimisées pour éviter les décalages CLS */
 @keyframes fadeInUp {
   from { 
     opacity: 0; 
@@ -119,9 +191,65 @@ body {
 
 .animate-fadeInUp {
   animation: fadeInUp 0.8s ease-out;
+  will-change: transform, opacity;
+  contain: layout style paint;
 }
 
-/* Transition pour éviter les flashes */
+/* Transition optimisée pour éviter les flashes */
 .smooth-transition {
   transition: opacity 0.5s ease-in-out;
+  will-change: opacity;
+}
+
+/* Optimisations spécifiques pour les particules */
+.particle-container {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Optimisation pour les éléments avec des bordures animées */
+.animate-border {
+  will-change: border-color;
+  contain: layout style paint;
+}
+
+/* Optimisation pour les gradients animés */
+.animate-gradient {
+  will-change: background-position;
+  contain: layout style paint;
+}
+
+/* Préchargement des polices critiques */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+}
+
+/* Réduction du reflow pour les éléments de texte dynamiques */
+.dynamic-text {
+  min-width: 4rem;
+  text-align: center;
+  will-change: contents;
+}
+
+/* Optimisation des images */
+img {
+  will-change: auto;
+  backface-visibility: hidden;
+}
+
+/* Optimisation des animations complexes */
+@media (prefers-reduced-motion: reduce) {
+  .animate-pulse,
+  .animate-ping,
+  .animate-bounce,
+  .animate-particle,
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}
+
+/* Containment pour les sections principales */
+section {
+  contain: layout style;
 } 
