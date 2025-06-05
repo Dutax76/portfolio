@@ -89,27 +89,28 @@ const Projects = () => {
     <section id="projects" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">
-            🚀 Mes Projets
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-3">
+            <span>🚀</span>
+            <span className="bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">Mes Projets</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-neon-green to-neon-blue mx-auto rounded-full" />
         </div>
 
         {/* Category Filter */}
-        <div className="flex justify-center mb-12">
-          <div className="glass-effect rounded-full p-2 flex space-x-2">
+        <div className="flex justify-center mb-12 px-4">
+          <div className="glass-effect rounded-full p-2 flex flex-wrap gap-2 sm:gap-3 justify-center max-w-full">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center space-x-2 ${
+                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base whitespace-nowrap ${
                   selectedCategory === category.id
                     ? 'bg-gradient-to-r from-neon-blue to-neon-purple text-white shadow-lg'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <span>{category.icon}</span>
-                <span>{category.name}</span>
+                <span className="hidden sm:inline">{category.name}</span>
               </button>
             ))}
           </div>
@@ -176,15 +177,7 @@ const Projects = () => {
                   </ul>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex space-x-3">
-                  <button className="flex-1 py-2 px-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg text-sm font-medium hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105">
-                    Voir le projet
-                  </button>
-                  <button className="py-2 px-4 border border-neon-green text-neon-green rounded-lg text-sm font-medium hover:bg-neon-green hover:text-dark-50 transition-all duration-300">
-                    Code
-                  </button>
-                </div>
+
               </div>
             </div>
           ))}

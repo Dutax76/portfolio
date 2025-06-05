@@ -190,7 +190,7 @@ const AIAssistant = () => {
   const currentActions = getContextualActions()
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
+    <div className="fixed bottom-8 right-8 z-50 hidden md:block">
       {/* Assistant Avatar */}
       <div className="relative">
         {/* Status indicator ring */}
@@ -221,7 +221,7 @@ const AIAssistant = () => {
 
         {/* Speech Bubble */}
         {displayText && (
-          <div className="absolute bottom-20 right-0 max-w-sm animate-in fade-in slide-in-from-bottom-2">
+          <div className="absolute bottom-20 right-0 max-w-xl animate-in fade-in slide-in-from-bottom-2">
             <div className="bg-black/95 backdrop-blur-md border border-neon-blue/50 rounded-2xl p-6 relative shadow-lg shadow-neon-blue/20">
               {/* Arrow */}
               <div className="absolute -bottom-2 right-8 w-4 h-4 bg-black/95 border-r border-b border-neon-blue/50 transform rotate-45" />

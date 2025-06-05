@@ -30,7 +30,7 @@ const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
           setPhase('complete')
           setTimeout(() => {
             onComplete()
-          }, 2500)
+          }, 1000)
           return 100
         }
         

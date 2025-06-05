@@ -23,8 +23,9 @@ const Skills = () => {
     <section id="skills" className="py-20 relative">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-neon-purple to-neon-pink bg-clip-text text-transparent">
-            💪 Compétences
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-3">
+            <span>💪</span>
+            <span className="bg-gradient-to-r from-neon-purple to-neon-pink bg-clip-text text-transparent">Compétences</span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-neon-purple to-neon-pink mx-auto rounded-full" />
         </div>

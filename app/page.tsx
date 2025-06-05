@@ -14,6 +14,7 @@ import Contact from './components/Contact'
 
 export default function Home() {
   const [showContent, setShowContent] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const [glitchEffect, setGlitchEffect] = useState(false)
   const cursorRef = useRef<HTMLDivElement>(null)
 
@@ -44,14 +45,23 @@ export default function Home() {
 
   const handleLoadingComplete = () => {
     setShowContent(true)
-  }
-
-  if (!showContent) {
-    return <LoadingScreen onComplete={handleLoadingComplete} />
+    // Délai pour permettre l'animation de transition
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 500)
   }
 
   return (
     <main className={`min-h-screen relative overflow-hidden ${glitchEffect ? 'animate-pulse' : ''}`}>
+      {/* Loading Screen avec transition */}
+      {isLoading && (
+        <div className={`transition-opacity duration-500 ${showContent ? 'opacity-0' : 'opacity-100'}`}>
+          <LoadingScreen onComplete={handleLoadingComplete} />
+        </div>
+      )}
+
+      {/* Contenu principal avec transition */}
+      <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
       {/* Cursor glow effect - OPTIMIZED */}
       <div
         ref={cursorRef}
@@ -97,8 +107,9 @@ export default function Home() {
         <Contact />
       </div>
 
-      {/* AI Assistant */}
-      <AIAssistant />
+        {/* AI Assistant */}
+        <AIAssistant />
+      </div>
 
       {/* Enhanced styles */}
       <style jsx>{`

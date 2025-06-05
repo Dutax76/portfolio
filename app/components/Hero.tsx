@@ -120,7 +120,7 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto">
           {/* Avatar/Logo */}
           <div className="mb-8 inline-block">
-            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1 animate-pulse">
+            <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1">
               <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center">
                 <img 
                   src="/img/selfie.jpg" 
