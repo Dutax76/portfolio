@@ -6,7 +6,7 @@ const Hero = () => {
   const [text, setText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const [currentPhrase, setCurrentPhrase] = useState(0)
-  const [isClient, setIsClient] = useState(false)
+  const [showAnimations, setShowAnimations] = useState(false)
   const animationRef = useRef<number>()
   const lastFrameTime = useRef(0)
   const textProgress = useRef(0)
@@ -71,27 +71,27 @@ const Hero = () => {
     }
   }, [isTyping, currentPhrase, phrases])
 
+  // Retarder les animations non-critiques pour optimiser LCP
   useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  useEffect(() => {
-    if (isClient) {
+    // Affichage immédiat du contenu critique
+    const timer = setTimeout(() => {
+      setShowAnimations(true)
       textProgress.current = 0
       animationRef.current = requestAnimationFrame(animate)
-    }
+    }, 100) // Très court délai pour permettre le rendu du contenu critique
     
     return () => {
+      clearTimeout(timer)
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [isClient, animate])
+  }, [animate])
 
   return (
     <section className="min-h-screen flex items-center justify-center relative pt-20">
-      {/* Shapes réduites et optimisées */}
-      {isClient && (
+      {/* Shapes réduites et optimisées - retardées pour LCP */}
+      {showAnimations && (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {fixedShapes.current.map((shape, i) => (
             <div
@@ -112,7 +112,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Avatar - Optimisé */}
+          {/* Avatar - Critique pour LCP */}
           <div className="mb-8 inline-block w-32 h-32">
             <div className="w-full h-full mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1">
               <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center overflow-hidden">
@@ -123,31 +123,38 @@ const Hero = () => {
                   loading="eager"
                   width="112"
                   height="112"
+                  fetchPriority="high"
                 />
               </div>
             </div>
           </div>
 
-          {/* Titre principal */}
+          {/* Titre principal - Critique pour LCP */}
           <div className="mb-6 h-20 flex items-center justify-center">
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-neon-blue to-neon-purple bg-clip-text text-transparent text-center">
               Thomas Guislin
             </h1>
           </div>
 
-          {/* Texte animé optimisé */}
+          {/* Texte animé - NON critique, retardé */}
           <div className="text-2xl md:text-3xl font-light mb-8 h-12 flex items-center justify-center">
             <div className="min-w-96 text-center">
               <span className="text-neon-blue font-mono">
-                <span className="inline-block min-w-[320px] text-left">
-                  {text}
-                  <span className="animate-pulse-slow">|</span>
-                </span>
+                {showAnimations ? (
+                  <span className="inline-block min-w-[320px] text-left">
+                    {text}
+                    <span className="animate-pulse-slow">|</span>
+                  </span>
+                ) : (
+                  <span className="inline-block min-w-[320px] text-left text-neon-blue">
+                    Développeur Passionné
+                  </span>
+                )}
               </span>
             </div>
           </div>
 
-          {/* Description */}
+          {/* Description - CRITIQUE pour LCP - Affichage immédiat */}
           <div className="mb-12 max-w-2xl mx-auto">
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
               Étudiant passionné en deuxième année de BUT Informatique à Lille, 
@@ -159,7 +166,7 @@ const Hero = () => {
             </p>
           </div>
 
-          {/* CTA Buttons optimisés */}
+          {/* CTA Buttons - Critiques pour LCP */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center h-20">
             <a
               href="#projects"
@@ -182,16 +189,18 @@ const Hero = () => {
             </a>
           </div>
 
-          {/* Scroll indicator simplifié */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-            <div className="w-6 h-10 border-2 border-neon-blue rounded-full flex justify-center animate-bounce-slow">
-              <div className="w-1 h-3 bg-neon-blue rounded-full mt-2" />
+          {/* Scroll indicator - Non critique */}
+          {showAnimations && (
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <div className="w-6 h-10 border-2 border-neon-blue rounded-full flex justify-center animate-bounce-slow">
+                <div className="w-1 h-3 bg-neon-blue rounded-full mt-2" />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
-      {/* Styles CSS optimisés pour INP */}
+      {/* Styles CSS optimisés pour LCP */}
       <style jsx>{`
         /* Animations lentes pour économiser CPU */
         .animate-float-slow {
@@ -250,6 +259,6 @@ const Hero = () => {
       `}</style>
     </section>
   )
-  }
-  
+}
+
 export default Hero 
