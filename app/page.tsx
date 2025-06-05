@@ -9,23 +9,9 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 
 export default function Home() {
-  const [glitchEffect, setGlitchEffect] = useState(false)
-
-  // Effet de glitch aléatoire optimisé
-  useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      if (Math.random() < 0.05) {
-        setGlitchEffect(true)
-        setTimeout(() => setGlitchEffect(false), 100)
-      }
-    }, 5000)
-
-    return () => clearInterval(glitchInterval)
-  }, [])
-
   return (
-    <main className={`min-h-screen relative overflow-hidden ${glitchEffect ? 'animate-pulse' : ''}`}>
-      {/* Background stylé mais optimisé */}
+    <main className="min-h-screen relative overflow-hidden">
+      {/* Background stylé mais optimisé pour INP */}
       <div className="fixed inset-0 pointer-events-none">
         {/* Gradient de base */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950" />
@@ -33,7 +19,7 @@ export default function Home() {
         {/* Overlay avec texture */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-slate-900/20" />
         
-        {/* Grille cyber */}
+        {/* Grille cyber statique (plus de mouvement) */}
         <div 
           className="absolute inset-0 opacity-15"
           style={{
@@ -47,22 +33,23 @@ export default function Home() {
           }}
         />
         
-        {/* Points lumineux statiques */}
+        {/* Points lumineux réduits et statiques (12 → 6) */}
         <div className="absolute inset-0">
-          {[...Array(12)].map((_, i) => (
+          {[...Array(6)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-1 h-1 bg-neon-blue rounded-full opacity-30"
+              className="absolute w-1 h-1 bg-neon-blue rounded-full opacity-25"
               style={{
-                left: `${15 + (i * 7) % 70}%`,
-                top: `${10 + (i * 11) % 80}%`,
-                boxShadow: '0 0 10px rgba(0, 212, 255, 0.5)'
+                left: `${20 + (i * 12) % 60}%`,
+                top: `${15 + (i * 17) % 70}%`,
+                boxShadow: '0 0 8px rgba(0, 212, 255, 0.4)',
+                contain: 'layout style paint'
               }}
             />
           ))}
         </div>
         
-        {/* Lignes de circuit subtiles */}
+        {/* Lignes de circuit subtiles et statiques */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-blue to-transparent" />
           <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent" />
@@ -81,35 +68,21 @@ export default function Home() {
         <Contact />
       </div>
 
-      {/* Styles optimisés */}
+      {/* Styles simplifiés - suppression de toutes les animations coûteuses */}
       <style jsx>{`
-        /* Animation glitch simplifiée */
-        .animate-pulse {
-          animation: pulse 1s ease-in-out 1;
-        }
+        /* Plus d'animations pour économiser l'INP */
         
-        @keyframes pulse {
-          0%, 100% { 
-            opacity: 1; 
-          }
-          50% { 
-            opacity: 0.95; 
+        /* Media queries pour les performances */
+        @media (max-resolution: 1.5dppx) {
+          .bg-neon-blue {
+            box-shadow: none;
           }
         }
         
-        /* Subtle glow pour les points */
-        .w-1.h-1.bg-neon-blue {
-          animation: glow 3s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-          from {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          to {
-            opacity: 0.6;
-            transform: scale(1.2);
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation: none !important;
+            transition: none !important;
           }
         }
       `}</style>

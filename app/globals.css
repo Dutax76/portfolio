@@ -38,7 +38,7 @@ body {
   justify-content: center;
 }
 
-/* Optimisations pour réduire les décalages CLS */
+/* Optimisations INP - Réduction des animations coûteuses */
 .will-change-transform {
   will-change: transform;
 }
@@ -51,7 +51,7 @@ body {
   will-change: opacity;
 }
 
-/* Containment pour les animations */
+/* Containment amélioré pour les performances */
 .animate-pulse,
 .animate-ping,
 .animate-bounce {
@@ -59,40 +59,16 @@ body {
   will-change: transform, opacity;
 }
 
-/* Optimisation des éléments animés */
+/* Optimisation légère des éléments animés */
 [class*="animate-"] {
   contain: layout style paint;
-  will-change: transform;
 }
 
-/* Forcer l'accélération matérielle pour les transformations */
+/* GPU acceleration uniquement pour les transformations importantes */
 .transform,
 [style*="transform"] {
   will-change: transform;
   backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-/* Animation des particules */
-@keyframes particle {
-  0% {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.2;
-  }
-  90% {
-    opacity: 0.2;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-.animate-particle {
-  animation: particle 20s linear infinite;
 }
 
 .glass-effect {
@@ -105,15 +81,13 @@ body {
   box-shadow: 
     0 0 5px var(--neon-blue),
     0 0 10px var(--neon-blue),
-    0 0 15px var(--neon-blue),
-    0 0 20px var(--neon-blue);
+    0 0 15px var(--neon-blue);
 }
 
 .text-glow {
   text-shadow: 
     0 0 5px var(--neon-blue),
-    0 0 10px var(--neon-blue),
-    0 0 15px var(--neon-blue);
+    0 0 10px var(--neon-blue);
 }
 
 .cyber-border {
@@ -125,6 +99,7 @@ body {
   mask-composite: subtract;
 }
 
+/* Animation hologram supprimée pour améliorer INP */
 .hologram {
   background: linear-gradient(
     45deg,
@@ -134,29 +109,21 @@ body {
     rgba(236, 72, 153, 0.1) 75%,
     rgba(0, 212, 255, 0.1) 100%
   );
-  background-size: 400% 400%;
-  animation: hologram 4s ease-in-out infinite;
-  will-change: background-position;
+  /* Animation supprimée pour performances */
   contain: layout style paint;
-}
-
-@keyframes hologram {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
 }
 
 .floating-card {
   transform: translateY(0);
-  transition: all 0.3s ease;
-  will-change: transform;
+  transition: transform 0.2s ease; /* Réduit de 0.3s à 0.2s */
   contain: layout style paint;
 }
 
 .floating-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px); /* Réduit de -10px à -8px */
   box-shadow: 
-    0 20px 40px rgba(0, 212, 255, 0.3),
-    0 0 30px rgba(0, 212, 255, 0.2);
+    0 15px 30px rgba(0, 212, 255, 0.2), /* Réduit l'intensité */
+    0 0 20px rgba(0, 212, 255, 0.1);
 }
 
 /* Scrollbar styling */
@@ -190,32 +157,31 @@ body {
 }
 
 .animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out;
-  will-change: transform, opacity;
+  animation: fadeInUp 0.6s ease-out; /* Réduit de 0.8s à 0.6s */
   contain: layout style paint;
 }
 
 /* Transition optimisée pour éviter les flashes */
 .smooth-transition {
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out; /* Réduit de 0.5s à 0.3s */
   will-change: opacity;
 }
 
-/* Optimisations spécifiques pour les particules */
+/* Optimisations spécifiques pour les particules - SUPPRIMÉES */
 .particle-container {
   contain: layout style paint;
-  will-change: transform;
+  will-change: auto; /* Changé de transform à auto */
 }
 
 /* Optimisation pour les éléments avec des bordures animées */
 .animate-border {
-  will-change: border-color;
+  will-change: auto; /* Changé de border-color à auto */
   contain: layout style paint;
 }
 
-/* Optimisation pour les gradients animés */
+/* Optimisation pour les gradients animés - SUPPRIMÉE */
 .animate-gradient {
-  will-change: background-position;
+  will-change: auto; /* Changé de background-position à auto */
   contain: layout style paint;
 }
 
@@ -238,18 +204,56 @@ img {
   backface-visibility: hidden;
 }
 
-/* Optimisation des animations complexes */
+/* Optimisation pour reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .animate-pulse,
   .animate-ping,
   .animate-bounce,
-  .animate-particle,
+  .animate-fadeInUp,
   [class*="animate-"] {
     animation: none !important;
+  }
+  
+  .floating-card {
+    transition: none !important;
+  }
+  
+  .smooth-transition {
+    transition: none !important;
+  }
+}
+
+/* Optimisation pour les écrans basse résolution */
+@media (max-resolution: 1.5dppx) {
+  .neon-glow,
+  .text-glow {
+    box-shadow: none;
+    text-shadow: none;
+  }
+  
+  .floating-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1);
   }
 }
 
 /* Containment pour les sections principales */
 section {
   contain: layout style;
+}
+
+/* Optimisation spécifique pour l'INP */
+button, a, [role="button"] {
+  contain: layout style;
+  will-change: auto;
+}
+
+/* Performance optimizations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Reduced shadow complexity */
+.simple-shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 } 
