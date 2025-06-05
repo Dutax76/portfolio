@@ -2,8 +2,8 @@ import React from 'react'
 import './globals.css'
 
 export const metadata = {
-  title: 'Thomas Guislin - Portfolio Futuriste',
-  description: 'Portfolio moderne et interactif de Thomas Guislin, développeur passionné',
+  title: 'Thomas Guislin - Portfolio',
+  description: 'Portfolio de Thomas Guislin, développeur passionné',
 }
 
 export default function RootLayout({
