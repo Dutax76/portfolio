@@ -18,8 +18,8 @@ const About = () => {
             <div className="glass-effect rounded-2xl p-8 floating-card">
               <h3 className="text-2xl font-bold mb-4 text-neon-blue">Bonjour ! 👋</h3>
               <p className="text-lg leading-relaxed text-gray-300 mb-6">
-                Je m'appelle Thomas Guislin. J'ai 19 ans et suis originaire de Rouen. 
-                Actuellement à Lille pour mes études supérieures, je suis en deuxième année 
+                Je m'appelle Thomas Guislin. J'ai 20 ans et suis originaire de Rouen. 
+                Actuellement à Lille pour mes études supérieures, je suis en troisième année 
                 de mon BUT-Informatique, situé à l'Université Technologique de Lille 
                 (site de Villeneuve d'Ascq).
               </p>
@@ -30,12 +30,12 @@ const About = () => {
             </div>
 
             <div className="glass-effect rounded-2xl p-8 floating-card bg-gradient-to-r from-neon-green/10 to-neon-blue/10">
-              <h3 className="text-xl font-bold mb-4 text-neon-green">🚀 Recherche d'Alternance</h3>
+              <h3 className="text-xl font-bold mb-4 text-neon-green">🚀 Recherche de Stage</h3>
               <p className="text-lg leading-relaxed text-gray-300 mb-4">
-                Je suis actuellement en pleine <strong className="text-neon-green">recherche pour une Alternance</strong> à partir de Septembre 2025.
+                Je suis actuellement en pleine <strong className="text-neon-green">recherche pour un Stage</strong> à partir de mi-mars 2025.
               </p>
               <p className="text-lg leading-relaxed text-gray-300">
-                Sur un rythme d'<strong className="text-neon-blue">1 semaine en entreprise</strong> et <strong className="text-neon-blue">1 semaine à l'Université</strong>.
+                Sur une période de<strong className="text-neon-blue"> 4 mois</strong>.
               </p>
             </div>
           </div>

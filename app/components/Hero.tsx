@@ -13,7 +13,7 @@ const Hero = () => {
     'Développeur Passionné',
     'Étudiant en BUT Informatique',
     'Créateur d\'Expériences Numériques',
-    'Futur Alternant'
+    'Futur Stagiaire'
   ]
 
   // Réduit le nombre de shapes pour améliorer l'INP (25 → 8)
@@ -146,11 +146,11 @@ const Hero = () => {
           {/* Description - CRITIQUE pour LCP - Affichage immédiat */}
           <div className="mb-12 max-w-2xl mx-auto">
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Étudiant passionné en deuxième année de BUT Informatique à Lille, 
+              Étudiant passionné en troisième année de BUT Informatique à Lille, 
               spécialisé dans la création d'applications web modernes et innovantes.
               <br />
               <span className="text-neon-blue font-semibold">
-                Actuellement en recherche d'alternance pour septembre 2025 !
+                Actuellement en recherche de stage pour mi-mars 2025 !
               </span>
             </p>
           </div>
@@ -177,15 +177,6 @@ const Hero = () => {
               </svg>
             </a>
           </div>
-
-          {/* Scroll indicator - Non critique */}
-          {showAnimations && (
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-              <div className="w-6 h-10 border-2 border-neon-blue rounded-full flex justify-center animate-bounce-slow">
-                <div className="w-1 h-3 bg-neon-blue rounded-full mt-2" />
-              </div>
-            </div>
-          )}
         </div>
       </div>
 

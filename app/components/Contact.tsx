@@ -59,7 +59,7 @@ const Contact = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-neon-pink to-neon-purple mx-auto rounded-full" />
           <p className="text-xl text-gray-300 mt-6 max-w-2xl mx-auto">
-            Vous avez un projet en tête ? Une opportunité d'alternance ? 
+            Vous avez un projet en tête ? Une opportunité de stage ? 
             N'hésitez pas à me contacter ! 🚀
           </p>
         </div>
@@ -95,8 +95,8 @@ const Contact = () => {
                   🚀
                 </div>
                 <div>
-                  <p className="text-white font-medium">Recherche d'alternance</p>
-                  <p className="text-gray-400">Septembre 2025</p>
+                  <p className="text-white font-medium">Recherche de stage</p>
+                  <p className="text-gray-400">Mi-mars 2025</p>
                 </div>
               </div>
 

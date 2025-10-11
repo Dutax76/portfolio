@@ -4,7 +4,7 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'Thomas Guislin - Portfolio',
   description: 'Portfolio de Thomas Guislin, étudiant en BUT Informatique à Lille. Développeur passionné spécialisé dans les applications web modernes.',
-  keywords: 'Thomas Guislin, portfolio, développeur, BUT Informatique, Lille, alternance, web developer',
+  keywords: 'Thomas Guislin, portfolio, développeur, BUT Informatique, Lille, stage, web developer',
   authors: [{ name: 'Thomas Guislin' }],
   creator: 'Thomas Guislin',
   publisher: 'Thomas Guislin',
