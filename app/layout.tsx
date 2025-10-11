@@ -48,7 +48,7 @@ export default function RootLayout({
         {/* Préchargement critique des images LCP */}
         <link
           rel="preload"
-          href="/img/selfie.jpg"
+          href="/img/selfie.jpg?v=2"
           as="image"
           type="image/jpeg"
           fetchPriority="high"

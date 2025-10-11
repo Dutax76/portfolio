@@ -106,7 +106,7 @@ const Hero = () => {
             <div className="w-full h-full mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1">
               <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/img/selfie.jpg" 
+                  src="/img/selfie.jpg?v=2" 
                   alt="Thomas Guislin" 
                   className="w-28 h-28 rounded-full object-cover"
                   loading="eager"
