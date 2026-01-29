@@ -60,7 +60,7 @@ const Hero = () => {
           </div>
 
           {/* Titre */}
-          <h1 className="text-5xl md:text-7xl font-extrabold text-brutal-black mb-6 font-brutal tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-brutal-black mb-6 font-brutal tracking-tight break-words max-w-full">
             Thomas Guislin
           </h1>
 

@@ -19,12 +19,14 @@
 
 html {
   font-family: 'Syne', system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 body {
   color: var(--brutal-black);
   background: var(--brutal-white);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Brutalist */
@@ -88,6 +90,9 @@ body {
   font-weight: 800;
   color: var(--brutal-black);
   letter-spacing: -0.02em;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .accent-underline {

@@ -283,7 +283,7 @@ const Projects = () => {
     <section id="projects" className="py-20 bg-brutal-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="section-title text-4xl md:text-5xl mb-4">
+          <h2 className="section-title text-2xl sm:text-3xl md:text-5xl mb-4">
             <span className="accent-underline inline-block">Mes Projets</span>
           </h2>
         </div>

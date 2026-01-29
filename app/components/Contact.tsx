@@ -26,7 +26,7 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-brutal-white border-t-4 border-brutal-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="section-title text-4xl md:text-5xl mb-4">
+          <h2 className="section-title text-2xl sm:text-3xl md:text-5xl mb-4">
             <span className="accent-underline inline-block">Me Contacter</span>
           </h2>
           <p className="text-xl text-neutral-600 mt-6 max-w-2xl mx-auto">
