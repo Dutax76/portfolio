@@ -1,244 +1,115 @@
 'use client'
 
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 
 const Hero = () => {
   const [text, setText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const [currentPhrase, setCurrentPhrase] = useState(0)
   const [showAnimations, setShowAnimations] = useState(false)
-  const timeoutRef = useRef<NodeJS.Timeout>()
-  
+
   const phrases = [
     'Développeur Passionné',
     'Étudiant en BUT Informatique',
     'Créateur d\'Expériences Numériques',
-    'Futur Stagiaire'
+    'Futur Alternant'
   ]
 
-  // Réduit le nombre de shapes pour améliorer l'INP (25 → 8)
-  const fixedShapes = useRef([
-    { left: 15, top: 15, delay: 0, size: 'medium' },
-    { left: 85, top: 20, delay: 0.5, size: 'small' },
-    { left: 10, top: 45, delay: 1, size: 'small' },
-    { left: 90, top: 50, delay: 1.5, size: 'medium' },
-    { left: 20, top: 75, delay: 2, size: 'medium' },
-    { left: 80, top: 80, delay: 2.5, size: 'small' },
-    { left: 50, top: 10, delay: 3, size: 'large' },
-    { left: 50, top: 90, delay: 3.5, size: 'medium' }
-  ])
-
-  const getSizeClass = useCallback((size: string) => {
-    switch (size) {
-      case 'small': return 'w-10 h-10'
-      case 'medium': return 'w-12 h-12'
-      case 'large': return 'w-16 h-16'
-      default: return 'w-12 h-12'
-    }
-  }, [])
-
-  // Retarder les animations non-critiques pour optimiser LCP
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowAnimations(true)
-    }, 100) // Très court délai pour permettre le rendu du contenu critique
-    
-    return () => clearTimeout(timer)
+    const t = setTimeout(() => setShowAnimations(true), 100)
+    return () => clearTimeout(t)
   }, [])
 
-  // Animation typing simplifiée - se lance quand showAnimations devient true
   useEffect(() => {
     if (!showAnimations) return
-
     let timeout: NodeJS.Timeout | undefined
-    
     if (isTyping) {
       if (text.length < phrases[currentPhrase].length) {
-        timeout = setTimeout(() => {
-          setText(phrases[currentPhrase].slice(0, text.length + 1))
-        }, 100)
+        timeout = setTimeout(() => setText(phrases[currentPhrase].slice(0, text.length + 1)), 100)
       } else {
         timeout = setTimeout(() => setIsTyping(false), 2000)
       }
     } else {
       if (text.length > 0) {
-        timeout = setTimeout(() => {
-          setText(text.slice(0, -1))
-        }, 50)
+        timeout = setTimeout(() => setText(text.slice(0, -1)), 50)
       } else {
         setCurrentPhrase((prev) => (prev + 1) % phrases.length)
         setIsTyping(true)
       }
     }
-
-    timeoutRef.current = timeout
-    return () => {
-      if (timeout) clearTimeout(timeout)
-    }
+    return () => { if (timeout) clearTimeout(timeout) }
   }, [text, isTyping, currentPhrase, showAnimations, phrases])
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-20">
-      {/* Shapes réduites et optimisées - retardées pour LCP */}
-      {showAnimations && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {fixedShapes.current.map((shape, i) => (
-            <div
-              key={i}
-              className="absolute opacity-15 animate-float-slow"
-              style={{
-                left: `${shape.left}%`,
-                top: `${shape.top}%`,
-                animationDelay: `${shape.delay}s`,
-                contain: 'layout style paint'
-              }}
-            >
-              <div className={`${getSizeClass(shape.size)} border border-neon-blue/30 rotate-45 bg-neon-blue/5`} />
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="container mx-auto px-6 text-center relative z-10">
+    <section className="min-h-screen flex items-center justify-center relative pt-24 pb-20">
+      <div className="container mx-auto px-6 text-center">
         <div className="max-w-4xl mx-auto">
-          {/* Avatar - Critique pour LCP */}
-          <div className="mb-8 inline-block w-32 h-32">
-            <div className="w-full h-full mx-auto rounded-full bg-gradient-to-r from-neon-blue to-neon-purple p-1">
-              <div className="w-full h-full rounded-full bg-dark-100 flex items-center justify-center overflow-hidden">
-                <img 
-                  src="/img/selfie.jpg?v=2" 
-                  alt="Thomas Guislin" 
-                  className="w-28 h-28 rounded-full object-cover"
-                  loading="eager"
-                  width="112"
-                  height="112"
-                  fetchPriority="high"
-                />
-              </div>
+          {/* Avatar */}
+          <div className="mb-8 inline-block">
+            <div className="w-32 h-32 rounded-full border-4 border-brutal-black shadow-[6px_6px_0_0_#0a0a0a] overflow-hidden bg-brutal-white">
+              <img
+                src="/img/selfie.jpg?v=2"
+                alt="Thomas Guislin"
+                className="w-full h-full object-cover"
+                loading="eager"
+                width={128}
+                height={128}
+                fetchPriority="high"
+              />
             </div>
           </div>
 
-          {/* Titre principal - Critique pour LCP */}
-          <div className="mb-6 h-20 flex items-center justify-center">
-            <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-neon-blue to-neon-purple bg-clip-text text-transparent text-center">
-              Thomas Guislin
-            </h1>
+          {/* Titre */}
+          <h1 className="text-5xl md:text-7xl font-extrabold text-brutal-black mb-6 font-brutal tracking-tight">
+            Thomas Guislin
+          </h1>
+
+          {/* Texte animé */}
+          <div className="text-xl md:text-2xl font-medium mb-8 min-h-[2.5rem] flex items-center justify-center">
+            <span className="text-brutal-black border-b-4 border-brutal-accent pb-1">
+              {showAnimations ? (
+                <span className="inline-block min-w-[280px] md:min-w-[320px] text-left">
+                  {text}
+                  <span className="animate-pulse">|</span>
+                </span>
+              ) : (
+                'Développeur Passionné'
+              )}
+            </span>
           </div>
 
-          {/* Texte animé - NON critique, retardé */}
-          <div className="text-2xl md:text-3xl font-light mb-8 h-12 flex items-center justify-center">
-            <div className="min-w-96 text-center">
-              <span className="text-neon-blue font-mono">
-                {showAnimations ? (
-                  <span className="inline-block min-w-[320px] text-left">
-                    {text}
-                    <span className="animate-pulse-slow">|</span>
-                  </span>
-                ) : (
-                  <span className="inline-block min-w-[320px] text-left text-neon-blue">
-                    Développeur Passionné
-                  </span>
-                )}
-              </span>
-            </div>
-          </div>
+          {/* Description */}
+          <p className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-12">
+            Étudiant en 3e année de BUT Informatique à Lille, spécialisé dans la création d'applications web.
+            <br />
+            <span className="font-bold text-brutal-accent">Recherche d'alternance pour septembre 2026.</span>
+          </p>
 
-          {/* Description - CRITIQUE pour LCP - Affichage immédiat */}
-          <div className="mb-12 max-w-2xl mx-auto">
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Étudiant passionné en troisième année de BUT Informatique à Lille, 
-              spécialisé dans la création d'applications web modernes et innovantes.
-              <br />
-              <span className="text-neon-blue font-semibold">
-                Actuellement en recherche de stage pour mi-mars 2025 !
-              </span>
-            </p>
-          </div>
-
-          {/* CTA Buttons - Critiques pour LCP */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center h-20">
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="#projects"
-              className="group px-8 py-4 bg-gradient-to-r from-neon-blue to-neon-purple rounded-full font-semibold text-lg hover:shadow-lg hover:shadow-neon-blue/20 transition-all duration-200 hover:scale-105 flex items-center space-x-2"
+              className="brutal-btn px-8 py-4 text-lg inline-flex items-center gap-2"
             >
-              <span>🚀 Voir mes projets</span>
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Voir mes projets
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
-            
             <a
               href="#contact"
-              className="group px-8 py-4 border-2 border-neon-blue rounded-full font-semibold text-lg hover:bg-neon-blue hover:text-dark-50 transition-all duration-200 hover:scale-105 flex items-center space-x-2"
+              className="brutal-btn-outline px-8 py-4 text-lg inline-flex items-center gap-2"
             >
-              <span>💬 Me contacter</span>
-              <svg className="w-5 h-5 group-hover:rotate-12 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              Me contacter
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </a>
           </div>
         </div>
       </div>
-
-      {/* Styles CSS optimisés pour LCP */}
-      <style jsx>{`
-        /* Animations lentes pour économiser CPU */
-        .animate-float-slow {
-          animation: float 8s ease-in-out infinite;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse 2s ease-in-out infinite;
-        }
-
-        .animate-bounce-slow {
-          animation: bounce 3s ease-in-out infinite;
-        }
-
-        /* Animation float économe */
-        @keyframes float {
-          0%, 100% { 
-            transform: translateY(0px);
-          }
-          50% { 
-            transform: translateY(-15px);
-          }
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
-        }
-
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-
-        /* Media queries responsives */
-        @media (max-width: 768px) {
-          .min-w-96 {
-            min-width: 280px;
-          }
-          
-          .min-w-\\[320px\\] {
-            min-width: 250px !important;
-          }
-        }
-
-        /* Optimisation pour les devices avec peu de ressources */
-        @media (max-resolution: 1.5dppx) {
-          .animate-float-slow {
-            animation: none;
-          }
-        }
-      `}</style>
     </section>
   )
 }
 
-export default Hero 
+export default Hero

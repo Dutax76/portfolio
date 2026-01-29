@@ -35,12 +35,12 @@ export default function RootLayout({
           crossOrigin=""
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
         <noscript>
           <link
-            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
           />
         </noscript>
@@ -72,10 +72,10 @@ export default function RootLayout({
           __html: `
             /* CSS critique inline pour LCP */
             body { 
-              font-family: system-ui, -apple-system, sans-serif; 
+              font-family: 'Syne', system-ui, sans-serif; 
               margin: 0;
-              background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
-              color: white;
+              background: #f5f3ef;
+              color: #0a0a0a;
               min-height: 100vh;
             }
             
@@ -99,7 +99,7 @@ export default function RootLayout({
             .text-5xl { font-size: 3rem; line-height: 1; }
             .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
             .font-bold { font-weight: 700; }
-            .text-gray-300 { color: rgb(209 213 219); }
+            .text-gray-600 { color: rgb(82 82 91); }
             .leading-relaxed { line-height: 1.625; }
             
             @media (min-width: 768px) {
@@ -109,16 +109,9 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className="bg-dark-50 text-white overflow-x-hidden">
-        {/* Background optimisé pour LCP */}
-        <div className="min-h-screen relative bg-gradient-to-br from-slate-950 via-blue-950 to-purple-950">
-          {/* Texture de base - critique */}
-          <div className="fixed inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-slate-900/10 pointer-events-none" />
-          
-          {/* Content principal */}
-          <div className="relative z-10">
-            {children}
-          </div>
+      <body className="bg-brutal-white text-brutal-black overflow-x-hidden font-brutal">
+        <div className="min-h-screen relative">
+          {children}
         </div>
       </body>
     </html>

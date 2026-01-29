@@ -8,6 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        brutal: {
+          black: '#0a0a0a',
+          white: '#f5f3ef',
+          accent: '#dc2626',
+          gray: '#737373',
+        },
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -45,6 +51,8 @@ module.exports = {
         'fadeInUp': 'fadeInUp 0.8s ease-out',
         'slideIn': 'slideIn 0.8s ease-out',
         'particle': 'particle 20s linear infinite',
+        'fadeIn': 'fadeIn 0.2s ease-out',
+        'zoomIn': 'zoomIn 0.2s ease-out',
       },
       keyframes: {
         float: {
@@ -66,13 +74,21 @@ module.exports = {
         particle: {
           '0%': { transform: 'translateY(100vh) rotate(0deg)' },
           '100%': { transform: 'translateY(-100vh) rotate(360deg)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        zoomIn: {
+          '0%': { opacity: '0', transform: 'scale(0.95)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         }
       },
       backdropBlur: {
         xs: '2px',
       },
       fontFamily: {
-        'cyber': ['Orbitron', 'monospace'],
+        brutal: ['Syne', 'system-ui', 'sans-serif'],
       }
     },
   },

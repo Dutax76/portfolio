@@ -1,0 +1,332 @@
+export type ProjectCategory = 'all' | 'web' | 'game' | 'desktop' | 'mobile' | 'system'
+
+export interface Project {
+  id: number
+  title: string
+  category: ProjectCategory
+  shortDescription: string
+  image: string | null
+  technologies: string[]
+  features: string[]
+  status: string
+  year: string
+  // Détails pour le modal
+  context?: string
+  authors?: string[]
+  longDescription?: string
+  highlights?: string[]
+  challenges?: string[]
+  links?: { label: string; url: string }[]
+}
+
+export const projects: Project[] = [
+  // ——— Projets existants ———
+  {
+    id: 1,
+    title: 'CampusTalk',
+    category: 'web',
+    shortDescription: 'Application web permettant aux étudiants et enseignants de communiquer efficacement.',
+    image: '/img/projets/CampusTalk.png',
+    technologies: ['Angular', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    features: ['Chat en temps réel', 'Gestion des groupes', 'Interface moderne'],
+    status: 'Terminé',
+    year: '2024',
+  },
+  {
+    id: 2,
+    title: 'Bagar.io',
+    category: 'game',
+    shortDescription: "Jeu en ligne multijoueur inspiré d'Agar.io avec des mécaniques innovantes.",
+    image: '/img/projets/Bagar.io.png',
+    technologies: ['JavaScript', 'Socket.io', 'Canvas API', 'Node.js'],
+    features: ['Multijoueur', 'Physique réaliste', 'Interface intuitive'],
+    status: 'Terminé',
+    year: '2024',
+  },
+  {
+    id: 3,
+    title: 'Classification App',
+    category: 'desktop',
+    shortDescription: 'Application JavaFX pour classifier des données CSV avec visualisation graphique.',
+    image: '/img/projets/classification.png',
+    technologies: ['Java', 'JavaFX', 'ML Algorithms'],
+    features: ['Import CSV', 'Algorithmes de tri', 'Graphiques interactifs'],
+    status: 'Terminé',
+    year: '2023',
+  },
+  {
+    id: 4,
+    title: 'QIkémon',
+    category: 'game',
+    shortDescription: 'Jeu éducatif inspiré de Pokémon pour apprendre différentes matières.',
+    image: '/img/projets/QIkemon.png',
+    technologies: ['Java', 'Terminal UI', 'OOP'],
+    features: ['Système de combat', 'Quiz éducatifs', 'Progression'],
+    status: 'Terminé',
+    year: '2023',
+  },
+  {
+    id: 5,
+    title: 'CocoVoit',
+    category: 'web',
+    shortDescription: 'Plateforme de covoiturage moderne avec géolocalisation.',
+    image: '/img/projets/Cocovoit.png',
+    technologies: ['HTML', 'CSS', 'JavaScript', 'Maps API'],
+    features: ['Géolocalisation', 'Système de réservation', 'Profils utilisateurs'],
+    status: 'Terminé',
+    year: '2023',
+  },
+  {
+    id: 6,
+    title: "Itinéraires SNCF",
+    category: 'desktop',
+    shortDescription: "Application pour trouver le meilleur chemin entre deux villes.",
+    image: '/img/projets/Itineraires.png',
+    technologies: ['Java', 'JavaFX', 'Algorithmes de graphes'],
+    features: ["Calcul d'itinéraires", 'Interface graphique', 'Optimisation'],
+    status: 'Terminé',
+    year: '2023',
+  },
+  // ——— Nouveaux projets (README) ———
+  {
+    id: 7,
+    title: 'Calendrier – Gestion de rendez-vous',
+    category: 'web',
+    shortDescription: 'Framework de prise de rendez-vous générique (créneaux médicaux, piscine, etc.) avec calendrier interactif et trois niveaux d’accès.',
+    image: '/img/projets/calendrier.png',
+    technologies: ['Spring Boot', 'Java', 'JPA / Hibernate', 'Spring Security', 'Maven', 'MVC'],
+    features: [
+      'Calendrier mois par mois avec jours fériés et week-ends',
+      'Consultation des créneaux et taux d’occupation (code couleur) sans compte',
+      'Authentification, prise de RDV, tableau de bord personnel, annulation',
+      'Profil utilisateur avec photo',
+      'Supervision admin, gestion des créneaux, périodes de fermeture',
+      'API REST (liste RDV du jour, RDV futurs par personne)',
+      'Internationalisation (Fr/En/Sp) et envoi d’emails',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'BUT3 Informatique – Module S5.A.01 Frameworks Web (Université de Lille)',
+    authors: ['Quentin LYOEN', 'Thomas GUISLIN'],
+    longDescription: "Projet de framework générique de prise de rendez-vous réalisé en 6 semaines avec une évolution incrémentale : départ en Servlet/JSP, puis persistance (DAO puis JPA), migration vers Spring Boot, puis couches Sécurité, API REST, i18n et envoi de mails. Le système s'adapte à différents scénarios (1 personne/15 min type médecin, ou 30 personnes/1 h type piscine) sans changer le code, uniquement la configuration.",
+    highlights: [
+      'Architecture MVC complète avec Spring Boot et JPA',
+      'Spring Security avec UserDetails et mots de passe hachés (BCrypt)',
+      'Modèle de données générique (Utilisateur, Créneau, RendezVous, Fermeture)',
+      'API REST exposée (XML/JSON)',
+      'Gestion fine des horaires (minutes depuis minuit) et des contraintes de capacité',
+    ],
+    challenges: [
+      'Manipulation des dates/horaires Java (LocalDate) pour un calendrier dynamique',
+      'Configuration Spring Security et chaîne de filtres',
+      'Conception générique pour scénarios Médecin vs Piscine sans duplication de code',
+    ],
+  },
+  {
+    id: 8,
+    title: 'Émulateur processeur RISC-V',
+    category: 'system',
+    shortDescription: 'Émulateur complet du processeur RISC-V (RV32I + extensions M et F), périphériques mémoire-mappés et semihosting.',
+    image: null,
+    technologies: ['Rust', 'RV32I', 'Extension M (multiplication)', 'Extension F (flottant)', 'Docker'],
+    features: [
+      'Décodeur d’instructions → sortie CSV opcode → catégorie',
+      'Désassembleur binaire → assembleur RISC-V lisible',
+      'Émulateur complet avec mode interactif de débogage (step, continue, registres, mémoire)',
+      'Périphériques mémoire-mappés : GPIO, GPU (framebuffer 320×240 RGBA), Sound Card (44.1 kHz)',
+      'Semihosting (SYS_WRITEC, SYS_WRITE0)',
+      'Interface graphique de visualisation de l’état',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'SAÉ S5.A.01 – Projet système (Rust)',
+    authors: ['Thomas Guislin', 'Quentin Lyoen'],
+    longDescription: "Implémentation en Rust d'un émulateur RISC-V avec jeu d'instructions RV32I, extensions M (mul, div, rem...) et F (flottant 32 bits : flw, fsw, fadd.s, fmul.s, etc.), encodages R/I/S/B/U/J, et périphériques (GPIO, GPU, Sound Card). Livrables progressifs : décodeur, désassembleur, émulateur de base, émulateur avec périphériques. Docker par livrable.",
+    highlights: [
+      'Maîtrise de Rust pour un projet système (mémoire, performance)',
+      'Implémentation fidèle des specs RISC-V (RV32I + M + F)',
+      'Mode débogage interactif (step, registres, mémoire)',
+      'Périphériques et semihosting pour un environnement réaliste',
+    ],
+    challenges: [
+      'Décodage et exécution de toutes les instructions et encodages',
+      'Gestion des périphériques mémoire-mappés et semihosting',
+    ],
+  },
+  {
+    id: 9,
+    title: 'Gallilé – Gestion numérique des formations',
+    category: 'web',
+    shortDescription: 'Plateforme web de gestion des formations : import de conventions PDF (OCR), signature par QR code, génération d’attestations et feuilles d’émargement.',
+    image: '/img/projets/gallile.png',
+    technologies: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'Spring Boot 3.2', 'JPA', 'PostgreSQL', 'JWT'],
+    features: [
+      'Import automatique de conventions PDF (extraction + OCR pour documents scannés)',
+      'Signature numérique par QR code (renouvellement régulier, une signature par participant/appareil)',
+      'Génération PDF : feuille d’émargement et attestations individuelles',
+      'Tableau de bord, calendrier, filtres (entreprise, formateur, statut), recherche',
+      'Notifications, statistiques, mode sombre, responsive et accessible',
+    ],
+    status: 'En production',
+    year: '2026',
+    context: 'Projet personnel / professionnel – Remplacement du système papier d’émargement',
+    authors: ['Thomas Guislin'],
+    longDescription: "Gallilé digitalise l’émargement et la délivrance d’attestations pour les organismes de formation. Les formateurs créent et gèrent les sessions, les participants signent via QR code depuis leur smartphone sans compte, et les admins génèrent les documents officiels. Conçu pour être intuitif et conforme aux usages métier.",
+    highlights: [
+      'Stack moderne full-stack (React 19 + Spring Boot 3)',
+      'OCR et extraction de données structurées depuis des PDFs scannés',
+      'UX mobile-first pour la signature par QR code',
+      'Génération de documents PDF conformes aux standards',
+    ],
+    challenges: [
+      'Extraction fiable des données depuis des PDFs hétérogènes (avec OCR)',
+      'Sécurité et unicité des signatures par QR code',
+    ],
+  },
+  {
+    id: 10,
+    title: 'OpenGuessr (GeoGuessr)',
+    category: 'web',
+    shortDescription: 'Clone de GeoGuessr avec Street View, mode solo et multijoueur en temps réel, scores basés sur la distance.',
+    image: '/img/projets/openguessr.png',
+    technologies: ['Next.js 14+', 'TypeScript', 'Tailwind CSS', 'Google Maps', 'Supabase', 'Lucide React'],
+    features: [
+      'Street View avec Google Maps',
+      'Mode solo et multijoueur en temps réel',
+      'Système de score basé sur la distance',
+      '5 rounds par partie',
+      'Gestion des déconnexions',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'Projet personnel – Clone du jeu GeoGuessr',
+    longDescription: "Application web type GeoGuessr : le joueur voit une vue Street View et doit placer un marqueur sur la carte. Le score dépend de la distance entre la réponse et la position réelle. Mode solo et multijoueur synchronisé via Supabase Realtime.",
+    highlights: [
+      'Next.js App Router et intégration Google Maps / Street View',
+      'Temps réel avec Supabase pour le multijoueur',
+      'UX soignée (feedback, déconnexions)',
+    ],
+  },
+  {
+    id: 11,
+    title: 'Hikabrain – Plugin Minecraft',
+    category: 'game',
+    shortDescription: 'Plugin Spigot 1.12.2 qui recrée le mini-jeu Hikabrain (Funcraft) avec PvP 1.8.9 et support des deux mains.',
+    image: null,
+    technologies: ['Java', 'Spigot 1.12.2', 'Maven'],
+    features: [
+      'PvP 1.8.9 (sans cooldown d’attaque) sur 1.12.2',
+      'Support des deux mains (1.12.2)',
+      'Équipes Rouge vs Bleue, détection des lits pour marquer un point',
+      'Équipement auto (épée, pioche, blocs, pomme dorée infinie), armure colorée',
+      'Premier à 5 points gagne, effets visuels et sons',
+      'Configuration complète (positions, spawns, lits) et commandes /join, /leave, /hikabrain reload',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'Projet personnel – Mini-jeu Minecraft',
+    longDescription: "Plugin Minecraft qui reproduit le mini-jeu Hikabrain : deux équipes s’affrontent, l’objectif est de marcher sur le lit adverse pour marquer. Le plugin réplique le feeling PvP 1.8.9 (attaque sans cooldown) sur Spigot 1.12.2 et gère toute la logique (arène, équipes, score, config).",
+    highlights: [
+      'Désactivation du cooldown d’attaque (Attribute.GENERIC_ATTACK_SPEED) pour PvP 1.8.9',
+      'Architecture claire : Arena, GameManager, Team, listeners, ConfigManager',
+      'Configuration YAML et commandes admin',
+    ],
+    challenges: [
+      'Reproduire le PvP 1.8.9 sur une version plus récente du serveur',
+      'Détection fiable du passage sur le lit adverse',
+    ],
+  },
+  {
+    id: 12,
+    title: 'SoundCloud Party Guest (PlayCreator)',
+    category: 'web',
+    shortDescription: 'Application web locale pour que les invités ajoutent des musiques à une playlist SoundCloud depuis leurs téléphones (Wi-Fi local).',
+    image: '/img/projets/playcreator.png',
+    technologies: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Vercel'],
+    features: [
+      'Recherche en temps réel avec debounce',
+      'Ajout de titres à une playlist SoundCloud',
+      'Design Dark Mode / Party (accents néon), feedback (spinners, toasts)',
+      'Backend sur réseau local (0.0.0.0) pour accès depuis téléphones',
+      'Déploiement Vercel (API serverless + client)',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'Projet personnel – Soirées / événements',
+    longDescription: "Lors d’une soirée, l’hôte affiche l’app sur un écran ; les invités se connectent via l’IP locale et peuvent rechercher et ajouter des morceaux à une playlist SoundCloud partagée. Utilise l’API interne SoundCloud (non officielle) avec gestion du DataDome pour éviter le CAPTCHA.",
+    highlights: [
+      'Stack full-stack (React + Vite + Express) et déploiement Vercel',
+      'UX adaptée au contexte “party” (téléphones, réseau local)',
+      'Contournement des limitations API (headers, cookies) documenté',
+    ],
+    challenges: [
+      'Utilisation d’une API non officielle et évitement du blocage CAPTCHA (x-datadome-clientid, cookies)',
+      'CORS et exposition du backend sur le réseau local',
+    ],
+  },
+  {
+    id: 13,
+    title: 'Under – Backend (moteur de recommandation)',
+    category: 'web',
+    shortDescription: 'Moteur de recommandation musicale par IA pour découvrir des artistes indépendants : recherche par description, scoring multi-critères, apprentissage des goûts.',
+    image: null,
+    technologies: ['Node.js', 'OpenAI', 'PostgreSQL', 'Neo4j', 'pgvector', 'Docker'],
+    features: [
+      'Recherche par description naturelle (“musique chill années 90”) avec parsing IA',
+      'Scoring combiné : graphe d’artistes (Neo4j), similarité vectorielle (pgvector), récence, favorisation indé',
+      'Profil utilisateur et feedback (like/skip) pour améliorer les recommandations',
+      'Endpoints : /recommendations, /parse-filters, /get-comments, health, admin/export',
+      'Pondérations et boosters configurables (W_GRAPH, W_VECTOR, RATIO_EXPLORE, etc.)',
+      'Scripts d’entraînement (train_reranker.py), sécurité (CORS, rate limiting, validation)',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'Projet personnel – Découverte musicale (Éclypse)',
+    longDescription: "Under est un backend qui alimente une app de découverte musicale. L’IA comprend les descriptions en langage naturel, combine un graphe d’artistes (Neo4j), des embeddings (pgvector) et des préférences utilisateur pour recommander des artistes peu connus. Conçu pour être déployé en Docker et utilisé par l’app mobile Under.",
+    highlights: [
+      'Combinaison IA (OpenAI) + graphe (Neo4j) + vecteurs (pgvector) pour la recommandation',
+      'API REST documentée (Swagger), health checks, export de jeux de données pour réentraînement',
+      'Configuration avancée des algorithmes (pondérations, exploration vs exploitation)',
+    ],
+    challenges: [
+      'Fusion de plusieurs signaux (graphe, vecteurs, métadonnées) dans un score unique',
+      'Éviter la sur-exploitation (toujours les mêmes artistes) via RATIO_EXPLORE et boost indé',
+    ],
+  },
+  {
+    id: 14,
+    title: 'Under – Application mobile (Éclypse)',
+    category: 'mobile',
+    shortDescription: 'Application mobile de découverte musicale par IA : écoute, exploration et recommandations personnalisées (React Native).',
+    image: null,
+    technologies: ['React Native CLI', 'TypeScript', 'Zustand', 'React Navigation', 'Axios', 'Spotify API'],
+    features: [
+      'Navigation (Stack + Bottom Tabs), écrans Home, Explore, ArtistDetail, Profile',
+      'Intégration Spotify pour l’écoute et les données artistes',
+      'State global avec Zustand, thème et UI custom',
+      'Connexion au backend Under pour les recommandations IA',
+    ],
+    status: 'Terminé',
+    year: '2025',
+    context: 'Projet personnel – Découverte musicale (Éclypse)',
+    longDescription: "Application mobile iOS/Android qui s’appuie sur le backend Under pour la découverte d’artistes. L’utilisateur parcourt les recommandations, écoute via Spotify et affine son profil ; l’IA améliore les suggestions au fil du temps.",
+    highlights: [
+      'React Native CLI avec structure claire (navigation, screens, services, store)',
+      'Intégration API Spotify et backend custom',
+      'UX mobile (gestures, animations) avec react-native-reanimated et gesture-handler',
+    ],
+    challenges: [
+      'Synchronisation entre l’état local (Zustand) et les réponses du backend',
+      'Gestion des tokens et de l’environnement (react-native-dotenv)',
+    ],
+  },
+]
+
+export const categories: { id: ProjectCategory; name: string; icon: string }[] = [
+  { id: 'all', name: 'Tous', icon: '🌟' },
+  { id: 'web', name: 'Web', icon: '🌐' },
+  { id: 'game', name: 'Jeux', icon: '🎮' },
+  { id: 'desktop', name: 'Desktop', icon: '💻' },
+  { id: 'mobile', name: 'Mobile', icon: '📱' },
+  { id: 'system', name: 'Système', icon: '⚙️' },
+]

@@ -1,112 +1,303 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import { projects, categories, type Project, type ProjectCategory } from '@/app/data/projectsData'
 
-const Projects = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all')
+const categoryEmoji: Record<string, string> = {
+  web: '🌐',
+  game: '🎮',
+  desktop: '💻',
+  mobile: '📱',
+  system: '⚙️',
+}
 
-  const projects = [
-    {
-      id: 1,
-      title: 'CampusTalk',
-      category: 'web',
-      description: 'Application web permettant aux étudiants et enseignants de communiquer efficacement.',
-      image: '/img/projets/CampusTalk.png',
-      technologies: ['Angular', 'TypeScript', 'Node.js', 'PostgreSQL'],
-      features: ['Chat en temps réel', 'Gestion des groupes', 'Interface moderne'],
-      status: 'Terminé',
-      year: '2024'
-    },
-    {
-      id: 2,
-      title: 'Bagar.io',
-      category: 'game',
-      description: 'Jeu en ligne multijoueur inspiré d\'Agar.io avec des mécaniques innovantes.',
-      image: '/img/projets/Bagar.io.png',
-      technologies: ['JavaScript', 'Socket.io', 'Canvas API', 'Node.js'],
-      features: ['Multijoueur', 'Physique réaliste', 'Interface intuitive'],
-      status: 'Terminé',
-      year: '2024'
-    },
-    {
-      id: 3,
-      title: 'Classification App',
-      category: 'desktop',
-      description: 'Application JavaFX pour classifier des données CSV avec visualisation graphique.',
-      image: '/img/projets/classification.png',
-      technologies: ['Java', 'JavaFX', 'ML Algorithms'],
-      features: ['Import CSV', 'Algorithmes de tri', 'Graphiques interactifs'],
-      status: 'Terminé',
-      year: '2023'
-    },
-    {
-      id: 4,
-      title: 'QIkémon',
-      category: 'game',
-      description: 'Jeu éducatif inspiré de Pokémon pour apprendre différentes matières.',
-      image: '/img/projets/QIkemon.png',
-      technologies: ['Java', 'Terminal UI', 'OOP'],
-      features: ['Système de combat', 'Quiz éducatifs', 'Progression'],
-      status: 'Terminé',
-      year: '2023'
-    },
-    {
-      id: 5,
-      title: 'CocoVoit',
-      category: 'web',
-      description: 'Plateforme de covoiturage moderne avec géolocalisation.',
-      image: '/img/projets/Cocovoit.png',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Maps API'],
-      features: ['Géolocalisation', 'Système de réservation', 'Profils utilisateurs'],
-      status: 'Terminé',
-      year: '2023'
-    },
-    {
-      id: 6,
-      title: 'Itinéraires SNCF',
-      category: 'desktop',
-      description: 'Application pour trouver le meilleur chemin entre deux villes.',
-      image: '/img/projets/Itineraires.png',
-      technologies: ['Java', 'JavaFX', 'Algorithmes de graphes'],
-      features: ['Calcul d\'itinéraires', 'Interface graphique', 'Optimisation'],
-      status: 'Terminé',
-      year: '2023'
-    }
-  ]
-
-  const categories = [
-    { id: 'all', name: 'Tous', icon: '🌟' },
-    { id: 'web', name: 'Web', icon: '🌐' },
-    { id: 'game', name: 'Jeux', icon: '🎮' },
-    { id: 'desktop', name: 'Desktop', icon: '💻' }
-  ]
-
-  const filteredProjects = selectedCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === selectedCategory)
+const ProjectCard = ({
+  project,
+  index,
+  onSelect,
+}: {
+  project: Project
+  index: number
+  onSelect: () => void
+}) => {
+  const emoji = categoryEmoji[project.category] ?? '🚀'
+  const hasImage = project.image != null && project.image.length > 0
 
   return (
-    <section id="projects" className="py-20 relative">
+    <button
+      type="button"
+      onClick={onSelect}
+      className="brutal-card rounded-none overflow-hidden text-left w-full focus:outline-none focus-visible:ring-4 focus-visible:ring-brutal-accent border-4 border-brutal-black"
+      aria-label={`Voir les détails du projet ${project.title}`}
+    >
+      <div className="relative h-48 overflow-hidden border-b-4 border-brutal-black">
+        {hasImage ? (
+          <img
+            src={project.image!}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div
+            className="w-full h-full flex items-center justify-center bg-neutral-200"
+            aria-hidden
+          >
+            <span className="text-6xl" role="img">{emoji}</span>
+          </div>
+        )}
+        <div className="absolute top-3 right-3">
+          <span className="px-3 py-1 bg-brutal-accent text-brutal-white border-2 border-brutal-black text-sm font-bold">
+            {project.year}
+          </span>
+        </div>
+      </div>
+      <div className="p-6 bg-brutal-white">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-xl font-bold text-brutal-black pr-2">
+            {project.title}
+          </h3>
+          <span className="px-2 py-1 border-2 border-brutal-black text-brutal-black text-xs font-bold shrink-0">
+            {project.status}
+          </span>
+        </div>
+        <p className="text-neutral-600 mb-4 text-sm leading-relaxed line-clamp-3">
+          {project.shortDescription}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {project.technologies.slice(0, 5).map((tech, i) => (
+            <span
+              key={i}
+              className="px-2 py-1 border-2 border-brutal-black text-brutal-black text-xs font-medium"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.technologies.length > 5 && (
+            <span className="px-2 py-1 text-neutral-500 text-xs">+{project.technologies.length - 5}</span>
+          )}
+        </div>
+        <p className="mt-3 text-brutal-accent text-sm font-bold">
+          Voir les détails →
+        </p>
+      </div>
+    </button>
+  )
+}
+
+const ProjectDetailModal = ({
+  project,
+  onClose,
+}: {
+  project: Project
+  onClose: () => void
+}) => {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
+
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    },
+    [onClose]
+  )
+
+  useEffect(() => {
+    const fn = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', fn)
+    return () => document.removeEventListener('keydown', fn)
+  }, [onClose])
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
+
+  const emoji = categoryEmoji[project.category] ?? '🚀'
+  const hasImage = project.image != null && project.image.length > 0
+
+  const modalContent = (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 animate-fadeIn"
+      onClick={onClose}
+      onKeyDown={handleKeyDown}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-detail-title"
+    >
+      <div
+        className="bg-brutal-white border-4 border-brutal-black shadow-[8px_8px_0_0_#0a0a0a] max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-zoomIn"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative h-40 shrink-0 overflow-hidden border-b-4 border-brutal-black">
+          {hasImage ? (
+            <img src={project.image!} alt="" className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-neutral-200">
+              <span className="text-7xl" role="img">{emoji}</span>
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-3 right-3 w-10 h-10 border-4 border-brutal-black bg-brutal-white font-bold text-xl hover:bg-brutal-black hover:text-brutal-white transition-colors"
+            aria-label="Fermer"
+          >
+            ×
+          </button>
+          <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2 flex-wrap">
+            <span className="px-3 py-1 bg-brutal-accent text-brutal-white border-2 border-brutal-black text-sm font-bold">
+              {project.year}
+            </span>
+            <span className="px-3 py-1 bg-brutal-black text-brutal-white text-sm font-bold">
+              {project.status}
+            </span>
+          </div>
+        </div>
+        <div className="flex-1 overflow-y-auto p-6 space-y-5">
+          <div>
+            <h2 id="project-detail-title" className="text-2xl font-bold text-brutal-black mb-1">
+              {project.title}
+            </h2>
+            {project.context && (
+              <p className="text-brutal-accent text-sm font-bold">{project.context}</p>
+            )}
+            {project.authors && project.authors.length > 0 && (
+              <p className="text-neutral-600 text-sm mt-1">Avec : {project.authors.join(', ')}</p>
+            )}
+          </div>
+          {project.longDescription && (
+            <div>
+              <h3 className="text-sm font-bold text-brutal-black mb-2 uppercase tracking-wide border-b-2 border-brutal-accent pb-1">
+                Présentation
+              </h3>
+              <p className="text-neutral-600 text-sm leading-relaxed whitespace-pre-line">
+                {project.longDescription}
+              </p>
+            </div>
+          )}
+          <div>
+            <h3 className="text-sm font-bold text-brutal-black mb-2 uppercase tracking-wide border-b-2 border-brutal-accent pb-1">
+              Technologies
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {project.technologies.map((tech, i) => (
+                <span
+                  key={i}
+                  className="px-2 py-1 border-2 border-brutal-black text-brutal-black text-xs font-medium"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-brutal-black mb-2 uppercase tracking-wide border-b-2 border-brutal-accent pb-1">
+              Fonctionnalités
+            </h3>
+            <ul className="text-neutral-600 text-sm space-y-1">
+              {project.features.map((f, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="w-1.5 h-1.5 bg-brutal-accent shrink-0 mt-1.5" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {project.highlights && project.highlights.length > 0 && (
+            <div>
+              <h3 className="text-sm font-bold text-brutal-black mb-2 uppercase tracking-wide border-b-2 border-brutal-accent pb-1">
+                Points forts
+              </h3>
+              <ul className="text-neutral-600 text-sm space-y-1">
+                {project.highlights.map((h, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-brutal-accent">★</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {project.challenges && project.challenges.length > 0 && (
+            <div>
+              <h3 className="text-sm font-bold text-brutal-black mb-2 uppercase tracking-wide border-b-2 border-brutal-accent pb-1">
+                Défis relevés
+              </h3>
+              <ul className="text-neutral-600 text-sm space-y-1">
+                {project.challenges.map((c, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-brutal-accent">→</span>
+                    <span>{c}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {project.links && project.links.length > 0 && (
+            <div className="pt-2">
+              <div className="flex flex-wrap gap-3">
+                {project.links.map((link, i) => (
+                  <a
+                    key={i}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="brutal-btn px-4 py-2 text-sm"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+
+  if (!mounted) return null
+
+  return createPortal(modalContent, document.body)
+}
+
+const Projects = () => {
+  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>('all')
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+
+  const filteredProjects = (
+    selectedCategory === 'all'
+      ? projects
+      : projects.filter((p) => p.category === selectedCategory)
+  ).sort((a, b) => Number(b.year) - Number(a.year))
+
+  return (
+    <section id="projects" className="py-20 bg-brutal-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-3">
-            <span>🚀</span>
-            <span className="bg-gradient-to-r from-neon-green to-neon-blue bg-clip-text text-transparent">Mes Projets</span>
+          <h2 className="section-title text-4xl md:text-5xl mb-4">
+            <span className="accent-underline inline-block">Mes Projets</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-neon-green to-neon-blue mx-auto rounded-full" />
         </div>
 
-        {/* Category Filter */}
         <div className="flex justify-center mb-12 px-4">
-          <div className="glass-effect rounded-full p-2 flex flex-wrap gap-2 sm:gap-3 justify-center max-w-full">
+          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center max-w-full">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-300 flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base whitespace-nowrap ${
+                className={`px-4 sm:px-6 py-2 sm:py-3 font-bold text-sm sm:text-base whitespace-nowrap border-4 border-brutal-black transition-all flex items-center gap-2 ${
                   selectedCategory === category.id
-                    ? 'bg-gradient-to-r from-neon-blue to-neon-purple text-white shadow-lg'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    ? 'bg-brutal-accent text-brutal-white shadow-[4px_4px_0_0_#0a0a0a]'
+                    : 'bg-brutal-white text-brutal-black hover:bg-neutral-100'
                 }`}
               >
                 <span>{category.icon}</span>
@@ -116,75 +307,28 @@ const Projects = () => {
           </div>
         </div>
 
-        {/* Projects Grid */}
+        {/* Grille de projets */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {filteredProjects.map((project, index) => (
-            <div key={project.id} className="glass-effect rounded-2xl overflow-hidden floating-card group">
-              {/* Project Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-50/80 to-transparent" />
-                <div className="absolute top-4 right-4">
-                  <span className="px-3 py-1 bg-neon-green text-dark-50 rounded-full text-sm font-semibold">
-                    {project.year}
-                  </span>
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xl font-bold text-white group-hover:text-neon-blue transition-colors">
-                    {project.title}
-                  </h3>
-                  <span className="px-2 py-1 bg-neon-blue/20 text-neon-blue rounded text-xs">
-                    {project.status}
-                  </span>
-                </div>
-
-                <p className="text-gray-300 mb-4 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span 
-                        key={techIndex}
-                        className="px-2 py-1 bg-gradient-to-r from-neon-purple/20 to-neon-pink/20 text-neon-purple text-xs rounded-full border border-neon-purple/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Features */}
-                <div className="mb-4">
-                  <h4 className="text-sm font-semibold text-neon-green mb-2">Fonctionnalités :</h4>
-                  <ul className="text-xs text-gray-400 space-y-1">
-                    {project.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center space-x-2">
-                        <span className="w-1 h-1 bg-neon-green rounded-full" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-
-              </div>
-            </div>
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              onSelect={() => setSelectedProject(project)}
+            />
           ))}
         </div>
       </div>
+
+      {/* Modal de détail */}
+      {selectedProject && (
+        <ProjectDetailModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </section>
   )
 }
 
-export default Projects 
+export default Projects

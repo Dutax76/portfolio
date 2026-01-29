@@ -16,100 +16,65 @@ const Contact = () => {
   }
 
   const socialLinks = [
-    {
-      name: 'Email',
-      icon: '📧',
-      href: 'mailto:thomas.guislin@gmail.com',
-      color: 'from-red-500 to-pink-500',
-      description: 'thomas.guislin@gmail.com',
-      shortDescription: 'Écrivez-moi !'
-    },
-    {
-      name: 'LinkedIn',
-      icon: '💼',
-      href: 'https://www.linkedin.com/in/thomas-guislin-a23508329/',
-      color: 'from-blue-600 to-blue-800',
-      description: 'Connectons-nous !'
-    },
-    {
-      name: 'GitHub',
-      icon: '🐱',
-      href: 'https://github.com/Dutax76',
-      color: 'from-gray-700 to-gray-900',
-      description: 'Voir mes projets'
-    },
-    {
-      name: 'Discord',
-      icon: '🎮',
-      href: '',
-      color: 'from-indigo-500 to-purple-600',
-      description: 'Discutons de tech !',
-      isDiscord: true,
-      discordUsername: 'dutax'
-    }
+    { name: 'Email', icon: '📧', href: 'mailto:thomas.guislin@gmail.com', description: 'thomas.guislin@gmail.com', shortDescription: 'Écrivez-moi !' },
+    { name: 'LinkedIn', icon: '💼', href: 'https://www.linkedin.com/in/thomas-guislin-a23508329/', description: 'Connectons-nous !' },
+    { name: 'GitHub', icon: '🐱', href: 'https://github.com/Dutax76', description: 'Voir mes projets' },
+    { name: 'Discord', icon: '🎮', href: '', description: 'Discutons de tech !', isDiscord: true, discordUsername: 'dutax' },
   ]
 
   return (
-    <section id="contact" className="py-20 relative">
+    <section id="contact" className="py-20 bg-brutal-white border-t-4 border-brutal-black">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 flex items-center justify-center gap-3">
-            <span>✉️</span>
-            <span className="bg-gradient-to-r from-neon-pink to-neon-purple bg-clip-text text-transparent">Me Contacter</span>
+          <h2 className="section-title text-4xl md:text-5xl mb-4">
+            <span className="accent-underline inline-block">Me Contacter</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-neon-pink to-neon-purple mx-auto rounded-full" />
-          <p className="text-xl text-gray-300 mt-6 max-w-2xl mx-auto">
-            Vous avez un projet en tête ? Une opportunité de stage ? 
-            N'hésitez pas à me contacter ! 🚀
+          <p className="text-xl text-neutral-600 mt-6 max-w-2xl mx-auto">
+            Un projet, une opportunité d'alternance ? N'hésitez pas à me contacter.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <div className="glass-effect rounded-2xl p-8">
-            <h3 className="text-2xl font-bold mb-6 text-neon-green">🌟 Informations</h3>
-            
+          <div className="brutal-card rounded-none p-8">
+            <h3 className="text-2xl font-bold text-brutal-black mb-6">Informations</h3>
             <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-neon-blue to-neon-purple rounded-full flex items-center justify-center">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 border-4 border-brutal-black bg-brutal-accent text-brutal-white flex items-center justify-center font-bold shrink-0">
                   🎓
                 </div>
                 <div>
-                  <p className="text-white font-medium">Étudiant BUT Informatique</p>
-                  <p className="text-gray-400">Université de Lille</p>
+                  <p className="font-bold text-brutal-black">Étudiant BUT Informatique</p>
+                  <p className="text-neutral-600">Université de Lille</p>
                 </div>
               </div>
-              
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-neon-green to-neon-blue rounded-full flex items-center justify-center">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 border-4 border-brutal-black bg-brutal-white flex items-center justify-center font-bold shrink-0">
                   📍
                 </div>
                 <div>
-                  <p className="text-white font-medium">Lille, Rouen</p>
-                  <p className="text-gray-400">Ouvert à la mobilité</p>
+                  <p className="font-bold text-brutal-black">Lille, Rouen</p>
+                  <p className="text-neutral-600">Ouvert à la mobilité</p>
                 </div>
               </div>
-              
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-neon-pink to-neon-purple rounded-full flex items-center justify-center">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 border-4 border-brutal-black bg-brutal-accent text-brutal-white flex items-center justify-center font-bold shrink-0">
                   🚀
                 </div>
                 <div>
-                  <p className="text-white font-medium">Recherche de stage</p>
-                  <p className="text-gray-400">Mi-mars 2025</p>
+                  <p className="font-bold text-brutal-black">Recherche d'alternance</p>
+                  <p className="text-neutral-600">Septembre 2026</p>
                 </div>
               </div>
-
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-neon-blue to-neon-green rounded-full flex items-center justify-center">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 border-4 border-brutal-black bg-brutal-white flex items-center justify-center font-bold shrink-0">
                   💼
                 </div>
                 <div>
-                  <p className="text-white font-medium">CV disponible</p>
-                  <a 
-                    href="/cv-thomas-guislin.pdf" 
+                  <p className="font-bold text-brutal-black">CV disponible</p>
+                  <a
+                    href="/cv-thomas-guislin.pdf"
                     download
-                    className="text-neon-blue hover:text-neon-green transition-colors underline"
+                    className="text-brutal-accent font-bold underline hover:no-underline"
                   >
                     Télécharger mon CV
                   </a>
@@ -118,74 +83,51 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Social Links */}
-          <div className="glass-effect rounded-2xl p-8">
-            <h3 className="text-2xl font-bold mb-6 text-neon-purple">🔗 Réseaux & Contact</h3>
-            
+          <div className="brutal-card rounded-none p-8">
+            <h3 className="text-2xl font-bold text-brutal-black mb-6">Réseaux & Contact</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {socialLinks.map((link, index) => {
-                // Traitement spécial pour Discord
-                if ((link as any).isDiscord) {
+                if ((link as { isDiscord?: boolean }).isDiscord) {
+                  const l = link as { discordUsername: string }
                   return (
                     <button
                       key={index}
-                      onClick={() => copyDiscordUsername((link as any).discordUsername)}
-                      className="group p-4 bg-gradient-to-r from-dark-200 to-dark-100 rounded-xl hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105 cursor-pointer"
+                      onClick={() => copyDiscordUsername(l.discordUsername)}
+                      className="brutal-card rounded-none p-4 text-center hover:bg-brutal-accent hover:text-brutal-white transition-colors group"
                     >
-                      <div className="text-center relative">
-                        <div className={`w-12 h-12 mx-auto mb-3 bg-gradient-to-r ${link.color} rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform`}>
-                          {link.icon}
-                        </div>
-                        <h4 className="font-semibold text-white mb-1">{link.name}</h4>
-                        <p className="text-xs text-gray-400 overflow-hidden">
-                          {copiedDiscord ? 'Copié ! 📋' : `@${(link as any).discordUsername}`}
-                        </p>
-                        {copiedDiscord && (
-                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-neon-green rounded-full flex items-center justify-center animate-ping">
-                            <span className="text-xs">✓</span>
-                          </div>
-                        )}
-                      </div>
+                      <div className="text-3xl mb-2">{link.icon}</div>
+                      <h4 className="font-bold text-brutal-black group-hover:text-brutal-white">{link.name}</h4>
+                      <p className="text-sm text-neutral-600 group-hover:text-brutal-white">
+                        {copiedDiscord ? 'Copié !' : `@${l.discordUsername}`}
+                      </p>
                     </button>
                   )
                 }
-                
-                // Traitement normal pour les autres liens
                 return (
                   <a
                     key={index}
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group p-4 bg-gradient-to-r from-dark-200 to-dark-100 rounded-xl hover:shadow-lg hover:shadow-neon-blue/25 transition-all duration-300 hover:scale-105"
+                    className="brutal-card rounded-none p-4 text-center hover:bg-brutal-accent hover:text-brutal-white transition-colors group"
                   >
-                    <div className="text-center">
-                      <div className={`w-12 h-12 mx-auto mb-3 bg-gradient-to-r ${link.color} rounded-full flex items-center justify-center text-2xl group-hover:scale-110 transition-transform`}>
-                        {link.icon}
-                      </div>
-                      <h4 className="font-semibold text-white mb-1">{link.name}</h4>
-                      <p className="text-xs text-gray-400 overflow-hidden">
-                        {(link as any).shortDescription || link.description}
-                      </p>
-                    </div>
+                    <div className="text-3xl mb-2">{link.icon}</div>
+                    <h4 className="font-bold text-brutal-black group-hover:text-brutal-white">{link.name}</h4>
+                    <p className="text-sm text-neutral-600 group-hover:text-brutal-white">
+                      {(link as { shortDescription?: string }).shortDescription || link.description}
+                    </p>
                   </a>
                 )
               })}
             </div>
-
-            {/* Contact direct */}
-            <div className="mt-8 pt-6 border-t border-neon-purple/30">
-              <div className="text-center">
-                <p className="text-gray-300 mb-4">💬 Contact direct :</p>
-                <a
-                  href="mailto:thomas.guislin@gmail.com"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-neon-blue to-neon-purple px-4 sm:px-6 py-3 rounded-full font-semibold text-white hover:shadow-lg hover:shadow-neon-blue/30 transition-all duration-300 hover:scale-105 text-sm sm:text-base max-w-full"
-                >
-                  <span>📧</span>
-                  <span className="hidden sm:inline">thomas.guislin@gmail.com</span>
-                  <span className="sm:hidden">Me contacter</span>
-                </a>
-              </div>
+            <div className="mt-8 pt-6 border-t-4 border-brutal-black">
+              <p className="text-center text-neutral-600 mb-4">Contact direct</p>
+              <a
+                href="mailto:thomas.guislin@gmail.com"
+                className="brutal-btn w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3"
+              >
+                thomas.guislin@gmail.com
+              </a>
             </div>
           </div>
         </div>
@@ -194,4 +136,4 @@ const Contact = () => {
   )
 }
 
-export default Contact 
+export default Contact
