@@ -1,10 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+
+interface NavItem {
+  href: string
+  label: string
+  isPage?: boolean
+}
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -12,16 +20,32 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const navItems = [
+  const navItems: NavItem[] = [
     { href: '#about', label: 'À propos' },
     { href: '#skills', label: 'Compétences' },
     { href: '#projects', label: 'Projets' },
     { href: '#contact', label: 'Contact' },
+    { href: '/bilan-but3', label: 'Bilan BUT3', isPage: true },
   ]
 
-  const handleMobileMenuClick = (href: string) => {
+  const getHref = (item: NavItem) => {
+    if (item.isPage) return item.href
+    return pathname === '/' ? item.href : `/${item.href}`
+  }
+
+  const handleMobileMenuClick = (item: NavItem) => {
     setIsMobileMenuOpen(false)
-    setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' }), 150)
+    if (item.isPage) {
+      window.location.href = item.href
+      return
+    }
+    if (pathname === '/') {
+      setTimeout(() => {
+        document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' })
+      }, 150)
+    } else {
+      window.location.href = `/${item.href}`
+    }
   }
 
   return (
@@ -32,7 +56,7 @@ const Header = () => {
     >
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3 group">
+          <a href="/" className="flex items-center gap-3 group">
             <div className="w-10 h-10 border-4 border-brutal-black flex items-center justify-center overflow-hidden bg-brutal-white shadow-[3px_3px_0_0_#0a0a0a]">
               <img src="/img/logo.png" alt="Logo" className="w-full h-full object-contain" />
             </div>
@@ -40,20 +64,38 @@ const Header = () => {
           </a>
 
           <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="px-4 py-2 text-sm font-bold text-brutal-black border-2 border-transparent hover:border-brutal-black hover:bg-brutal-black hover:text-brutal-white transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
+            {navItems.map((item) => {
+              if (item.isPage) {
+                const isActive = pathname === item.href
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className={`ml-2 px-4 py-2 text-sm font-bold border-2 border-brutal-black shadow-[3px_3px_0_0_#0a0a0a] transition-all ${
+                      isActive 
+                        ? 'bg-brutal-accent text-brutal-white shadow-none translate-x-0.5 translate-y-0.5' 
+                        : 'bg-brutal-white text-brutal-black hover:bg-brutal-black hover:text-brutal-white hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[1px_1px_0_0_#0a0a0a]'
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                )
+              }
+              return (
+                <a
+                  key={item.href}
+                  href={getHref(item)}
+                  className="px-4 py-2 text-sm font-bold text-brutal-black border-2 border-transparent hover:border-brutal-black hover:bg-brutal-black hover:text-brutal-white transition-colors"
+                >
+                  {item.label}
+                </a>
+              )
+            })}
             <a
               href="https://drive.google.com/file/d/1eC4z0wYTpokmMaDuLat4FhZTw1f6QXjq/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-2 px-5 py-2 brutal-btn text-sm"
+              className="ml-4 px-5 py-2 brutal-btn text-sm"
             >
               CV
             </a>
@@ -78,14 +120,14 @@ const Header = () => {
         {/* Menu mobile */}
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
+            isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
           }`}
         >
           <div className="py-4 border-t-4 border-brutal-black space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.href}
-                onClick={() => handleMobileMenuClick(item.href)}
+                onClick={() => handleMobileMenuClick(item)}
                 className="w-full text-left px-4 py-3 font-bold text-brutal-black hover:bg-brutal-black hover:text-brutal-white transition-colors"
               >
                 {item.label}
@@ -108,3 +150,4 @@ const Header = () => {
 }
 
 export default Header
+
