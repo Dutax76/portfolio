@@ -60,7 +60,7 @@ export const bilanData: BilanData = {
   experiences: [
     {
       company: "CGI",
-      client: "Adeo (Leroy Merlin, Weldom, Bricoman)",
+      client: "Adeo",
       role: "Stage - Testeur de performances applicatives",
       period: "Avril 2026 — Août 2026 (En cours)",
       location: "Lille, France",
