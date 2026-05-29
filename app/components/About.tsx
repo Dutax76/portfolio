@@ -15,7 +15,7 @@ const About = () => {
             <div className="brutal-card rounded-none p-8">
               <h3 className="text-2xl font-bold text-brutal-black mb-4">Bonjour</h3>
               <p className="text-lg leading-relaxed text-neutral-600 mb-6">
-                Je m'appelle Thomas Guislin. J'ai 20 ans et suis originaire de Rouen.
+                Je m'appelle Thomas Guislin. J'ai 21 ans et suis originaire de Rouen.
                 Actuellement à Lille pour mes études, je suis en troisième année de BUT Informatique
                 à l'Université Technologique de Lille (Villeneuve d'Ascq).
               </p>
